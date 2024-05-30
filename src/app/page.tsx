@@ -19,17 +19,16 @@ const DATA = [
 
 export default function Home() {
   return (
-    <main className="h-screen bg-[url('../../public/images/mainBgImg.jpg')] bg-no-repeat bg-cover bg-center">
-      <section className="p-20 h-full flex flex-col items-center">
+    <main className="h-screen bg-[url('../../public/images/mainBgImg.jpg')] bg-cover bg-center bg-no-repeat">
+      <section className="flex h-full flex-col items-center p-20">
         <h1 className="text-6xl text-light-beige">독백노트</h1>
-        <div className="text-light-beige p-20 text-2xl text-center">
+        <div className="p-20 text-center text-2xl text-light-beige ">
           <p>독서를 하고 느낀 점을 기록해도 다시 보지 않아 기억에 남지 않던 경험이 있으신가요?</p>
           <p>
             독백노트를 통해 세 가지 단계로 기록하여 독서의 시간을 낭비하지 않고, 얻은 지식을
             오래도록 기억해보세요
           </p>
-
-          <section className="pt-60 flex flex-col items-center text-light-beige">
+          <section className="flex flex-col items-center pt-60 text-light-beige">
             {DATA.map(({ id, content }) => (
               <p key={id} className="pb-5">
                 {content}
@@ -40,7 +39,7 @@ export default function Home() {
 
         <Link href="/category" className="bg-transparent">
           <Image src={BookIcon} alt="book icon" />
-          <div className="text-light-beige text-center">시작하기</div>
+          <div className="text-center text-light-beige">시작하기</div>
         </Link>
       </section>
     </main>
