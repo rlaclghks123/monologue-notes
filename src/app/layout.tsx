@@ -19,7 +19,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navigation />
-        {children}
+        <main className="px-52 pt-16">{children}</main>
       </body>
     </html>
   );

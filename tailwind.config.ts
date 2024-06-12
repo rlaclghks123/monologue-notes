@@ -16,6 +16,7 @@ const config: Config = {
         'dark-brown': '#402001',
         'light-beige': '#FFF8E7',
         'bg-grey': '#f5f5f7',
+        'peach-fuzz': '#febf98',
       },
     },
   },
