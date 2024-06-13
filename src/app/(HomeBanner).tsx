@@ -19,7 +19,14 @@ export default function HomeBanner() {
   return (
     <section className="mt-5 box-border flex h-52 w-full justify-between rounded-lg bg-peach-fuzz">
       <div className="flex h-full w-1/2 flex-col items-center justify-center">
-        <Image src="/images/bookBoy.png" width="120" height="120" alt="책" priority />
+        <Image
+          src="/images/bookBoy.png"
+          width="120"
+          height="120"
+          alt="책"
+          priority
+          style={{ width: 'auto', height: 'auto' }}
+        />
         <p className="text-base">독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요</p>
       </div>
 
