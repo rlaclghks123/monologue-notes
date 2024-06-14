@@ -25,7 +25,7 @@ export default async function BestSellerBanner() {
   const { item }: BookApi = await getBook();
 
   return (
-    <div className="w-ful mt-11 overflow-hidden">
+    <div className="w-ful mt-11">
       <p className="mb-2">베스트 셀러</p>
       <CardList item={item} />
     </div>
