@@ -17,6 +17,7 @@ interface BestSeller {
   cover: string;
   title: string;
   author: string;
+  isbn13: string;
 }
 
 interface BookApi {
@@ -26,7 +27,6 @@ export default async function BestSellerBanner() {
   const headersList = headers();
   const curPage = Number(headersList.get('pathname')?.split('page=')[1]) || 1;
   const { item }: BookApi = await getBook(curPage);
-
   return (
     <div className="w-ful mt-11">
       <p className="mb-2">베스트 셀러</p>

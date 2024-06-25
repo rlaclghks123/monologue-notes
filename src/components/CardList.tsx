@@ -11,6 +11,7 @@ interface BestSeller {
   cover: string;
   title: string;
   author: string;
+  isbn13: string;
 }
 
 interface Props {
