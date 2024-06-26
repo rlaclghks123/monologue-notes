@@ -92,7 +92,7 @@ export default function BookDetail({ data, setData }: Props) {
                 id="title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                disabled={!!data}
+                disabled={data.cover !== NoImg}
                 placeholder="제목을 입력해주세요"
                 className="w-72 rounded-md bg-white p-1"
               />
@@ -104,7 +104,7 @@ export default function BookDetail({ data, setData }: Props) {
                 id="publisher"
                 value={publisher}
                 onChange={(e) => setPublisher(e.target.value)}
-                disabled={!!data}
+                disabled={data.cover !== NoImg}
                 placeholder="출판사를 입력해주세요"
                 className="w-72 rounded-md bg-white p-1"
               />
@@ -118,7 +118,7 @@ export default function BookDetail({ data, setData }: Props) {
                 max={MAX_PAGE}
                 value={itemPage}
                 onChange={handleItemPage}
-                disabled={!!data}
+                disabled={data.cover !== NoImg}
                 className="w-20 rounded-md bg-white p-1 "
               />
             </label>
