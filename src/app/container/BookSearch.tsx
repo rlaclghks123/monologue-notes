@@ -1,6 +1,7 @@
 'use client';
 
 import usePagenation from '@/hooks/usePagenation';
+import { IBookDetail, SelectedBook } from '@/types/book';
 import { useEffect, useState } from 'react';
 
 async function searchBook(query: string, curPage: number, limit: number) {
@@ -11,22 +12,21 @@ async function searchBook(query: string, curPage: number, limit: number) {
   return data;
 }
 
-interface IBook {
-  totalResults: number;
-  item: {
-    title: string;
-    cover: string;
-    publisher: string;
-    isbn13: string;
-    itemId: number;
-    subInfo: {
-      itemPage: number;
-    };
-  }[];
+async function detailBook(isbn: string) {
+  const BASE_URL = '/api/ttb/api/ItemLookUp.aspx';
+  const endpoint = `${BASE_URL}?ttbkey=${process.env.NEXT_PUBLIC_ALADIN_OPEN_API_KEY}&itemIdType=ISBN&ItemId=${isbn}&output=JS&Version=20131101`;
+  const response = await fetch(endpoint);
+  const data = await response.json();
+  return data;
 }
 
-export default function BookSearch() {
-  const [bookDetail, setBookDetail] = useState<IBook>();
+interface Props {
+  setData: React.Dispatch<React.SetStateAction<SelectedBook>>;
+  setIsOpen: (open: boolean) => void;
+}
+
+export default function BookSearch({ setData, setIsOpen }: Props) {
+  const [bookDetail, setBookDetail] = useState<IBookDetail>();
   const [query, setQuery] = useState('');
   const [curPage, setCurPage] = useState(1);
   const [isSearch, setIsSearch] = useState(false);
@@ -44,6 +44,16 @@ export default function BookSearch() {
     fetchSearchBook();
     setIsSearch(false);
   }, [curPage, isSearch]);
+
+  const handleClick = (isbn: string) => {
+    const fetchSearchBook = async () => {
+      const detailBooks = await detailBook(isbn);
+      setData(detailBooks.item[0]);
+      setIsOpen(false);
+    };
+
+    fetchSearchBook();
+  };
 
   return (
     <>
@@ -66,11 +76,15 @@ export default function BookSearch() {
         <div className="h-full overflow-hidden ">
           {bookDetail?.item ? (
             bookDetail?.item?.map((data) => (
-              <ul key={`${data?.itemId}`}>
-                <li className="my-1 h-7 w-full overflow-hidden truncate whitespace-nowrap hover:bg-gray-200">
+              <div key={`${data?.itemId}`}>
+                <button
+                  type="button"
+                  className="my-1 h-7 w-full overflow-hidden truncate whitespace-nowrap text-left hover:bg-gray-200"
+                  onClick={() => handleClick(data.isbn13)}
+                >
                   {`제목 : ${data?.title}`}
-                </li>
-              </ul>
+                </button>
+              </div>
             ))
           ) : (
             <div className="mt-10 text-center">검색 결과 없음</div>
