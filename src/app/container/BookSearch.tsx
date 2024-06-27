@@ -1,5 +1,6 @@
 'use client';
 
+import Button from '@/components/Button';
 import usePagenation from '@/hooks/usePagenation';
 import { IBookDetail, SelectedBook } from '@/types/book';
 import { useEffect, useState } from 'react';
@@ -63,62 +64,52 @@ export default function BookSearch({ setData, setIsOpen }: Props) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        <button
-          type="button"
+
+        <Button
+          text="검색"
           onClick={() => setIsSearch(true)}
           className="rounded-md border border-black p-1 px-2 hover:bg-gray-200"
-        >
-          검색
-        </button>
+        />
       </div>
 
       <div className="h-[85%] w-full p-3">
         <div className="h-full overflow-hidden ">
-          {bookDetail?.item ? (
-            bookDetail?.item?.map((data) => (
-              <div key={`${data?.itemId}`}>
-                <button
-                  type="button"
-                  className="my-1 h-7 w-full overflow-hidden truncate whitespace-nowrap text-left hover:bg-gray-200"
-                  onClick={() => handleClick(data.isbn13)}
-                >
-                  {`제목 : ${data?.title}`}
-                </button>
-              </div>
-            ))
-          ) : (
-            <div className="mt-10 text-center">검색 결과 없음</div>
-          )}
+          {!bookDetail?.item && <div className="mt-10 text-center">검색 결과 없음</div>}
+          {bookDetail?.item?.map((data) => (
+            <div key={`${data?.itemId}`}>
+              <Button
+                text={`제목 : ${data?.title}`}
+                className="my-1 h-7 w-full overflow-hidden truncate whitespace-nowrap text-left hover:bg-gray-200"
+                onClick={() => handleClick(data.isbn13)}
+              />
+            </div>
+          ))}
         </div>
 
         <div className="w-full">
           <div className="flex items-center justify-center gap-2">
-            <button
-              type="button"
+            <Button
+              text="<"
               onClick={handlePrev}
               disabled={curPage === 1}
               className="w-6 rounded-md hover:bg-gray-200"
-            >
-              {'<'}
-            </button>
+            />
+
             {pagenationArr[curPageGroup]?.map((number, idx) => (
-              <button
+              <Button
                 key={number}
-                type="button"
+                text={String(number)}
                 onClick={() => handleClickPage(number)}
                 className={`w-6 rounded-md hover:bg-gray-200 ${((curPage - 1) % 9) + 1 === idx + 1 ? 'bg-gray-200' : ''} `}
-              >
-                {number}
-              </button>
+              />
             ))}
-            <button
-              type="button"
+
+            <Button
+              text=">"
               onClick={handleNext}
               disabled={curPage === numberOfPages - 1}
               className="w-6 rounded-md hover:bg-gray-200"
-            >
-              {'>'}
-            </button>
+            />
           </div>
         </div>
       </div>

@@ -15,6 +15,7 @@ export default function BookDetailTextArea({ title, labelId, max }: Props) {
         <label htmlFor={labelId}>{title}</label>
         <p>{`${charCount}/${max} 자`}</p>
       </header>
+
       <textarea
         id={labelId}
         ref={ref}

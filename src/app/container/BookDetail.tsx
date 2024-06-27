@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 
 import { SelectedBook } from '@/types/book';
 import Input from '@/components/Input';
+import Button from '@/components/Button';
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
@@ -62,20 +63,12 @@ export default function BookDetail({ data, setData }: Props) {
     <>
       <section className="flex flex-col items-center pt-14">
         <div className="my-5 flex h-10 w-96  border border-solid border-gray-200">
-          <button
-            type="button"
-            className="h-full w-full  bg-white pl-3 hover:bg-gray-100"
-            onClick={() => setIsOpen(true)}
-          >
-            <span>🔍 책 찾기</span>
-          </button>
-          <button
-            type="button"
+          <Button text="🔍 책 찾기" onClick={() => setIsOpen(true)} />
+          <Button
+            text="초기화"
             className="w-24 border-l-2 border-gray-100 bg-white hover:bg-gray-100"
             onClick={() => setIsReset(true)}
-          >
-            초기화
-          </button>
+          />
         </div>
 
         <div className="flex w-full justify-center">
