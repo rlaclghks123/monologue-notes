@@ -8,9 +8,9 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export default function Input({ label, id, errorMessage, ...props }: Props) {
   return (
-    <div className="flex h-14">
+    <div className="flex h-14 items-start">
       {label && (
-        <label htmlFor={id} className="w-14">
+        <label htmlFor={id} className="w-14 py-1">
           {label}
         </label>
       )}
