@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 import { SelectedBook } from '@/types/book';
+import Input from '@/components/Input';
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
@@ -76,6 +77,7 @@ export default function BookDetail({ data, setData }: Props) {
             초기화
           </button>
         </div>
+
         <div className="flex w-full justify-center">
           <Image
             src={imageSrc}
@@ -85,43 +87,37 @@ export default function BookDetail({ data, setData }: Props) {
             priority
             className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
           />
-          <div className="flex flex-col justify-evenly gap-8 ">
-            <label htmlFor="title" className="flex items-center gap-4">
-              <span className="w-14">제목</span>
-              <input
-                id="title"
-                value={title}
-                onChange={(e) => setTitle(e.target.value)}
-                disabled={data.cover !== NoImg}
-                placeholder="제목을 입력해주세요"
-                className="w-72 rounded-md bg-white p-1"
-              />
-            </label>
 
-            <label htmlFor="publisher" className="flex items-center gap-4">
-              <span className="w-14">출판사</span>
-              <input
-                id="publisher"
-                value={publisher}
-                onChange={(e) => setPublisher(e.target.value)}
-                disabled={data.cover !== NoImg}
-                placeholder="출판사를 입력해주세요"
-                className="w-72 rounded-md bg-white p-1"
-              />
-            </label>
+          <div className="flex flex-col justify-evenly gap-2 ">
+            <Input
+              label="제목"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              disabled={data.cover !== NoImg}
+              placeholder="제목을 입력해주세요"
+              errorMessage="제목을 입력해주세요"
+            />
 
-            <label htmlFor="itemPage" className="flex items-center gap-4">
-              <span className="w-14">쪽수</span>
-              <input
-                id="itemPage"
-                min={MIN_PAGE}
-                max={MAX_PAGE}
-                value={itemPage}
-                onChange={handleItemPage}
-                disabled={data.cover !== NoImg}
-                className="w-20 rounded-md bg-white p-1 "
-              />
-            </label>
+            <Input
+              label="출판사"
+              id="publisher"
+              value={publisher}
+              onChange={(e) => setTitle(e.currentTarget.value)}
+              disabled={data.cover !== NoImg}
+              placeholder="제목을 입력해주세요"
+            />
+
+            <Input
+              label="출판사"
+              id="itemPage"
+              value={itemPage}
+              min={MIN_PAGE}
+              max={MAX_PAGE}
+              onChange={handleItemPage}
+              disabled={data.cover !== NoImg}
+              placeholder="제목을 입력해주세요"
+            />
           </div>
         </div>
       </section>
