@@ -3,6 +3,7 @@ import Navigation from '@/components/Navigation';
 
 import '../styles/reset.css';
 import '../styles/global.css';
+import Providers from './providers';
 
 export const metadata: Metadata = {
   title: '독백노트',
@@ -18,8 +19,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navigation />
-        <main className="px-52 pt-16">{children}</main>
+        <Providers>
+          <Navigation />
+          <main className="px-52 pt-16">{children}</main>
+        </Providers>
       </body>
     </html>
   );
