@@ -12,12 +12,13 @@ import NoImg from '../../../public/svgs/noImg.svg';
 interface Props {
   data: SelectedBook;
   setData: React.Dispatch<React.SetStateAction<SelectedBook>>;
+  setBookId: (id: string) => void;
 }
 
-export default function BookDetail({ data, setData }: Props) {
+export default function BookDetail({ data, setData, setBookId }: Props) {
   const [title, setTitle] = useState(data ? data.title : '');
   const [publisher, setPublisher] = useState(data ? data.publisher : '');
-  const [itemPage, setItemPage] = useState(data ? data.subInfo.itemPage : 0);
+  const [itemPage, setItemPage] = useState(data ? data.subInfo?.itemPage : 0);
   const [imageSrc, setImageSrc] = useState(NoImg);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -30,7 +31,7 @@ export default function BookDetail({ data, setData }: Props) {
     if (!isReset && data) {
       setTitle(data?.title);
       setPublisher(data?.publisher);
-      setItemPage(data?.subInfo.itemPage);
+      setItemPage(data?.subInfo?.itemPage);
       setImageSrc(data?.cover);
     }
     if (isReset) {
@@ -96,7 +97,7 @@ export default function BookDetail({ data, setData }: Props) {
               label="출판사"
               id="publisher"
               value={publisher}
-              onChange={(e) => setTitle(e.currentTarget.value)}
+              onChange={(e) => setPublisher(e.currentTarget.value)}
               disabled={data.cover !== NoImg}
               placeholder="제목을 입력해주세요"
             />
@@ -115,7 +116,7 @@ export default function BookDetail({ data, setData }: Props) {
         </div>
       </section>
 
-      {isOpen && <BookSearchModal isOpen={isOpen} setIsOpen={setIsOpen} setData={setData} />}
+      {isOpen && <BookSearchModal isOpen={isOpen} setIsOpen={setIsOpen} setBookId={setBookId} />}
     </>
   );
 }

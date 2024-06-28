@@ -1,64 +1,35 @@
 'use client';
 
+import { useState } from 'react';
+
 import Button from '@/components/Button';
 import usePagenation from '@/hooks/usePagenation';
-import { IBookDetail, SelectedBook } from '@/types/book';
-import { useEffect, useState } from 'react';
-
-async function searchBook(query: string, curPage: number, limit: number) {
-  const BASE_URL = '/api/ttb/api/ItemSearch.aspx';
-  const endpoint = `${BASE_URL}?ttbkey=${process.env.NEXT_PUBLIC_ALADIN_OPEN_API_KEY}&Query=${query}&QueryType=Title&MaxResults=${limit}&start=${curPage}&SearchTarget=Book&output=JS&Version=20131101`;
-  const response = await fetch(endpoint);
-  const data = await response.json();
-  return data;
-}
-
-async function detailBook(isbn: string) {
-  const BASE_URL = '/api/ttb/api/ItemLookUp.aspx';
-  const endpoint = `${BASE_URL}?ttbkey=${process.env.NEXT_PUBLIC_ALADIN_OPEN_API_KEY}&itemIdType=ISBN&ItemId=${isbn}&output=JS&Version=20131101`;
-  const response = await fetch(endpoint);
-  const data = await response.json();
-  return data;
-}
+import useSearchBooks from '../service/getSearchBooks';
 
 interface Props {
-  setData: React.Dispatch<React.SetStateAction<SelectedBook>>;
   setIsOpen: (open: boolean) => void;
+  setBookId: (id: string) => void;
 }
 
-export default function BookSearch({ setData, setIsOpen }: Props) {
-  const [bookDetail, setBookDetail] = useState<IBookDetail>();
+export default function BookSearch({ setBookId, setIsOpen }: Props) {
   const [query, setQuery] = useState('');
   const [curPage, setCurPage] = useState(1);
-  const [isSearch, setIsSearch] = useState(false);
+
   const limit = 9;
 
+  const { data: searchedBooks, refetch: searchedRefetch } = useSearchBooks(query, curPage, limit);
+
   const { handlePrev, handleClickPage, handleNext, pagenationArr, curPageGroup, numberOfPages } =
-    usePagenation({ totalCount: bookDetail?.totalResults, limit, curPage, setCurPage });
-
-  useEffect(() => {
-    const fetchSearchBook = async () => {
-      const books = await searchBook(query, curPage, limit);
-      if (books) setBookDetail(books);
-    };
-
-    fetchSearchBook();
-    setIsSearch(false);
-  }, [curPage, isSearch]);
+    usePagenation({ totalCount: searchedBooks?.totalResults, limit, curPage, setCurPage });
 
   const handleClick = (isbn: string) => {
-    const fetchSearchBook = async () => {
-      const detailBooks = await detailBook(isbn);
-      setData(detailBooks.item[0]);
-      setIsOpen(false);
-    };
-
-    fetchSearchBook();
+    setBookId(isbn);
+    setIsOpen(false);
   };
 
   return (
     <>
-      <div className="flex h-[10%] w-full justify-center gap-2">
+      <form className="flex h-[10%] w-full justify-center gap-2">
         <input
           className="w-2/4 rounded-md border border-black p-1"
           value={query}
@@ -67,15 +38,15 @@ export default function BookSearch({ setData, setIsOpen }: Props) {
 
         <Button
           text="검색"
-          onClick={() => setIsSearch(true)}
+          onClick={() => searchedRefetch()}
           className="rounded-md border border-black p-1 px-2 hover:bg-gray-200"
         />
-      </div>
+      </form>
 
       <div className="h-[85%] w-full p-3">
         <div className="h-full overflow-hidden ">
-          {!bookDetail?.item && <div className="mt-10 text-center">검색 결과 없음</div>}
-          {bookDetail?.item?.map((data) => (
+          {!searchedBooks?.item && <div className="mt-10 text-center">검색 결과 없음</div>}
+          {searchedBooks?.item?.map((data) => (
             <div key={`${data?.itemId}`}>
               <Button
                 text={`제목 : ${data?.title}`}

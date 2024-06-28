@@ -1,12 +1,13 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { SelectedBook } from '@/types/book';
 import Button from '@/components/Button';
 import BookDetailTextArea from '../container/BookDetailTextArea';
 import BookDetail from '../container/BookDetail';
 import NoImg from '../../../public/svgs/noImg.svg';
+import useBookDetail from '../service/getBookDetail';
 
 export default function Host() {
   const [data, setData] = useState<SelectedBook>({
@@ -17,10 +18,19 @@ export default function Host() {
       itemPage: 0,
     },
   });
+  const [bookId, setBookId] = useState('');
+  const { data: bookDetail } = useBookDetail(bookId);
+
+  useEffect(() => {
+    if (bookDetail) {
+      setData(bookDetail);
+      setBookId('');
+    }
+  }, [bookDetail]);
 
   return (
     <form className="mb-10">
-      <BookDetail data={data} setData={setData} />
+      <BookDetail data={data} setData={setData} setBookId={setBookId} />
 
       <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="beforeRead" max={1000} />
       <BookDetailTextArea title="저자가 전달하는 내용" labelId="writerSay" max={1000} />
