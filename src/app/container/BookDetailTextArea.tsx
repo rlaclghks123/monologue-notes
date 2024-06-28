@@ -22,7 +22,7 @@ export default function BookDetailTextArea({ title, labelId, max }: Props) {
         onChange={handleChange}
         value={value}
         maxLength={max}
-        className="mt-3 h-52 resize-none rounded-lg"
+        className="mt-3 h-52 resize-none rounded-lg p-2"
       />
     </div>
   );

@@ -1,7 +1,12 @@
-import Modal from '@/components/Modal';
+import { useState } from 'react';
 
+import Modal from '@/components/Modal';
 import Button from '@/components/Button';
+
 import BookSearch from './BookSearch';
+import BookSearchedList from './BookSearchedList';
+import BookSearchPagenation from './BookSearchPagenation';
+import useSearchBooks from '../service/getSearchBooks';
 
 interface Props {
   isOpen: boolean;
@@ -10,10 +15,29 @@ interface Props {
 }
 
 export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props) {
+  const [query, setQuery] = useState('');
+  const [curPage, setCurPage] = useState(1);
+  const limit = 9;
+
+  const { data: searchedBooks, refetch: searchedRefetch } = useSearchBooks(query, curPage, limit);
+
   return (
     <Modal open={isOpen}>
       <div className="h-[90%]">
-        <BookSearch setBookId={setBookId} setIsOpen={setIsOpen} />
+        <BookSearch query={query} setQuery={setQuery} refetch={searchedRefetch} />
+
+        <BookSearchedList
+          searchedBooks={searchedBooks?.item}
+          setBookId={setBookId}
+          setIsOpen={setIsOpen}
+        />
+
+        <BookSearchPagenation
+          totalCount={searchedBooks?.totalResults}
+          limit={limit}
+          curPage={curPage}
+          setCurPage={setCurPage}
+        />
       </div>
 
       <div className="flex h-[10%] justify-center gap-10">
