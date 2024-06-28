@@ -1,5 +1,5 @@
-import BestSellerBanner from './(BestSellerBanner)';
-import HomeBanner from './(HomeBanner)';
+import BestSellerBanner from './container/BestSellerBanner';
+import HomeBanner from './container/HomeBanner';
 
 export default async function Home() {
   return (
