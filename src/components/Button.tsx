@@ -17,7 +17,3 @@ export default function Button({ variant = 'primary', text, ...props }: Props) {
     </button>
   );
 }
-
-Button.defaultProps = {
-  variant: 'primary',
-};

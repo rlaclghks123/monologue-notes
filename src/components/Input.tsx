@@ -22,8 +22,3 @@ export default function Input({ label, id, errorMessage, ...props }: Props) {
     </div>
   );
 }
-
-Input.defaultProps = {
-  label: null,
-  errorMessage: null,
-};
