@@ -24,7 +24,6 @@ export default function Host() {
   useEffect(() => {
     if (bookDetail) {
       setData(bookDetail);
-      setBookId('');
     }
   }, [bookDetail]);
 

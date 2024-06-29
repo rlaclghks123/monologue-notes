@@ -40,12 +40,18 @@ function usePagenation({ totalCount, limit, curPage, setCurPage }: Props) {
   }, [totalCount, limit]);
 
   useEffect(() => {
-    if (totalCount) setNumberOfPages(Math.ceil(totalCount / limit));
+    if (totalCount) setNumberOfPages(Math.ceil(totalCount / limit) + 1);
+
     if (!totalCount) {
       setPagenationArr([[1]]);
-      setCurPage(1);
     }
-  }, [totalCount, setCurPage]);
+  }, [totalCount]);
+
+  useEffect(() => {
+    if (curPage === 1 && curPageGroup !== 0) {
+      setCurPageGroup(0);
+    }
+  }, [curPage]);
 
   return { handlePrev, handleClickPage, handleNext, pagenationArr, curPageGroup, numberOfPages };
 }

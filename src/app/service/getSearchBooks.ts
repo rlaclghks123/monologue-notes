@@ -10,11 +10,11 @@ async function getSearchBook(query: string, curPage: number, limit: number) {
 }
 
 export default function useSearchBooks(query: string, curPage: number, limit: number) {
-  const { data, isLoading, isError, refetch } = useQuery<IBookDetail>({
+  const { data, isLoading, isError } = useQuery<IBookDetail>({
     queryKey: ['searchBooks', query, curPage, limit],
     queryFn: () => getSearchBook(query, curPage, limit),
     placeholderData: keepPreviousData,
   });
 
-  return { data, isLoading, isError, refetch };
+  return { data, isLoading, isError };
 }

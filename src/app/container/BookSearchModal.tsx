@@ -19,12 +19,12 @@ export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props)
   const [curPage, setCurPage] = useState(1);
   const limit = 9;
 
-  const { data: searchedBooks, refetch: searchedRefetch } = useSearchBooks(query, curPage, limit);
+  const { data: searchedBooks } = useSearchBooks(query, curPage, limit);
 
   return (
     <Modal open={isOpen}>
       <div className="h-[90%]">
-        <BookSearch query={query} setQuery={setQuery} refetch={searchedRefetch} />
+        <BookSearch query={query} setQuery={setQuery} setCurPage={setCurPage} />
 
         <BookSearchedList
           searchedBooks={searchedBooks?.item}
