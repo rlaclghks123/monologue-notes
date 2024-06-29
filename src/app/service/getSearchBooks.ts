@@ -1,5 +1,5 @@
 import { IBookDetail } from '@/types/book';
-import { useQuery } from '@tanstack/react-query';
+import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 async function getSearchBook(query: string, curPage: number, limit: number) {
   const BASE_URL = '/api/ttb/api/ItemSearch.aspx';
@@ -13,7 +13,7 @@ export default function useSearchBooks(query: string, curPage: number, limit: nu
   const { data, isLoading, isError, refetch } = useQuery<IBookDetail>({
     queryKey: ['searchBooks', query, curPage, limit],
     queryFn: () => getSearchBook(query, curPage, limit),
-    enabled: false,
+    placeholderData: keepPreviousData,
   });
 
   return { data, isLoading, isError, refetch };
