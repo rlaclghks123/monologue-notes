@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 import { SelectedBook } from '@/types/book';
 import Input from '@/components/Input';
@@ -9,56 +10,48 @@ import Button from '@/components/Button';
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
-interface Props {
-  data: SelectedBook;
-  setData: React.Dispatch<React.SetStateAction<SelectedBook>>;
-  setBookId: React.Dispatch<React.SetStateAction<string>>;
+interface IBookInfo {
+  imageSrc: string;
+  title: string;
+  publisher: string;
+  itemPage: number;
 }
 
-export default function BookDetail({ data, setData, setBookId }: Props) {
-  const [title, setTitle] = useState(data ? data.title : '');
-  const [publisher, setPublisher] = useState(data ? data.publisher : '');
-  const [itemPage, setItemPage] = useState(data ? data.subInfo?.itemPage : 0);
-  const [imageSrc, setImageSrc] = useState(NoImg);
+interface Props {
+  data?: SelectedBook;
+  register: UseFormRegister<IBookInfo>;
+  setValue: UseFormSetValue<IBookInfo>;
+  setBookId: React.Dispatch<React.SetStateAction<string>>;
+  errors: FieldErrors<Omit<IBookInfo, 'imageSrc'>>;
+}
 
+export default function BookDetail({ data, setBookId, register, setValue, errors }: Props) {
+  const [imageSrc, setImageSrc] = useState(NoImg);
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
 
   const MAX_PAGE = 3000;
-  const MIN_PAGE = 0;
+  const MIN_PAGE = 1;
 
   useEffect(() => {
     if (!isReset && data) {
-      setTitle(data?.title);
-      setPublisher(data?.publisher);
-      setItemPage(data?.subInfo?.itemPage);
+      setValue('imageSrc', data.cover ?? NoImg);
+      setValue('title', data.title ?? '');
+      setValue('publisher', data.publisher ?? '');
+      setValue('itemPage', data.subInfo.itemPage ?? 0);
       setImageSrc(data?.cover);
     }
+
     if (isReset) {
-      const init = {
-        cover: NoImg,
-        title: '',
-        publisher: '',
-        subInfo: {
-          itemPage: 0,
-        },
-      };
-      setData(init);
-      setTitle(init.title);
-      setPublisher(init.publisher);
-      setItemPage(init.subInfo.itemPage);
-      setImageSrc(init.cover);
+      setValue('imageSrc', NoImg);
+      setValue('title', '');
+      setValue('publisher', '');
+      setValue('itemPage', 0);
+      setImageSrc(NoImg);
+      setBookId('');
       setIsReset(false);
     }
   }, [data, isReset]);
-
-  const handleItemPage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = Number(e.target.value);
-    if (Number.isNaN(value) || value < MIN_PAGE) return;
-
-    if (value > MAX_PAGE) setItemPage(MAX_PAGE);
-    else setItemPage(value);
-  };
 
   return (
     <>
@@ -86,31 +79,31 @@ export default function BookDetail({ data, setData, setBookId }: Props) {
             <Input
               label="제목"
               id="title"
-              value={title}
-              onChange={(e) => setTitle(e.currentTarget.value)}
-              disabled={data.cover !== NoImg}
               placeholder="제목을 입력해주세요"
-              errorMessage="제목을 입력해주세요"
+              {...register('title', { required: '제목은 필수 입력 항목입니다' })}
+              errorMessage={errors?.title?.message}
             />
-
             <Input
               label="출판사"
               id="publisher"
-              value={publisher}
-              onChange={(e) => setPublisher(e.currentTarget.value)}
-              disabled={data.cover !== NoImg}
               placeholder="제목을 입력해주세요"
+              {...register('publisher', { required: '출판사는 필수 입력 항목입니다' })}
+              errorMessage={errors?.publisher?.message}
             />
-
             <Input
-              label="출판사"
+              label="쪽수"
+              type="number"
               id="itemPage"
-              value={itemPage}
-              min={MIN_PAGE}
-              max={MAX_PAGE}
-              onChange={handleItemPage}
-              disabled={data.cover !== NoImg}
-              placeholder="제목을 입력해주세요"
+              placeholder="페이지수를 입력해주세요"
+              {...register('itemPage', {
+                required: '페이지는 필수 입력 항목입니다',
+                min: { value: MIN_PAGE, message: '1 이상의 숫자만 입력 가능합니다' },
+                max: {
+                  value: MAX_PAGE,
+                  message: '3000 이하의 숫자만 입력 가능합니다',
+                },
+              })}
+              errorMessage={errors?.itemPage?.message}
             />
           </div>
         </div>
