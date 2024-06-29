@@ -7,26 +7,19 @@ import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 import { SelectedBook } from '@/types/book';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { THost } from '@/types/host';
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
-interface IBookInfo {
-  imageSrc: string;
-  title: string;
-  publisher: string;
-  itemPage: number;
-}
-
 interface Props {
   data?: SelectedBook;
-  register: UseFormRegister<IBookInfo>;
-  setValue: UseFormSetValue<IBookInfo>;
+  register: UseFormRegister<THost>;
+  setValue: UseFormSetValue<THost>;
   setBookId: React.Dispatch<React.SetStateAction<string>>;
-  errors: FieldErrors<Omit<IBookInfo, 'imageSrc'>>;
+  errors: FieldErrors<Omit<THost, 'cover'>>;
 }
-
 export default function BookDetail({ data, setBookId, register, setValue, errors }: Props) {
-  const [imageSrc, setImageSrc] = useState(NoImg);
+  const [cover, setCover] = useState(NoImg);
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
 
@@ -35,19 +28,19 @@ export default function BookDetail({ data, setBookId, register, setValue, errors
 
   useEffect(() => {
     if (!isReset && data) {
-      setValue('imageSrc', data.cover ?? NoImg);
+      setValue('cover', data.cover ?? NoImg);
       setValue('title', data.title ?? '');
       setValue('publisher', data.publisher ?? '');
       setValue('itemPage', data.subInfo.itemPage ?? 0);
-      setImageSrc(data?.cover);
+      setCover(data?.cover);
     }
 
     if (isReset) {
-      setValue('imageSrc', NoImg);
+      setValue('cover', NoImg);
       setValue('title', '');
       setValue('publisher', '');
       setValue('itemPage', 0);
-      setImageSrc(NoImg);
+      setCover(NoImg);
       setBookId('');
       setIsReset(false);
     }
@@ -67,7 +60,7 @@ export default function BookDetail({ data, setBookId, register, setValue, errors
 
         <div className="flex w-full justify-center">
           <Image
-            src={imageSrc}
+            src={cover}
             alt="책 정보"
             width={150}
             height={160}
@@ -83,13 +76,15 @@ export default function BookDetail({ data, setBookId, register, setValue, errors
               {...register('title', { required: '제목은 필수 입력 항목입니다' })}
               errorMessage={errors?.title?.message}
             />
+
             <Input
               label="출판사"
               id="publisher"
-              placeholder="제목을 입력해주세요"
+              placeholder="출판사를 입력해주세요"
               {...register('publisher', { required: '출판사는 필수 입력 항목입니다' })}
               errorMessage={errors?.publisher?.message}
             />
+
             <Input
               label="쪽수"
               type="number"
