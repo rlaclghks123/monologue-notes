@@ -12,7 +12,7 @@ import NoImg from '../../../public/svgs/noImg.svg';
 interface Props {
   data: SelectedBook;
   setData: React.Dispatch<React.SetStateAction<SelectedBook>>;
-  setBookId: (id: string) => void;
+  setBookId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function BookDetail({ data, setData, setBookId }: Props) {

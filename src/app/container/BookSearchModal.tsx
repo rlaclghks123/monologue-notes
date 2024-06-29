@@ -10,8 +10,8 @@ import useSearchBooks from '../service/getSearchBooks';
 
 interface Props {
   isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  setBookId: (id: string) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setBookId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props) {

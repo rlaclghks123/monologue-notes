@@ -5,8 +5,8 @@ import { IBookDetail } from '@/types/book';
 
 interface Props {
   searchedBooks?: IBookDetail['item'];
-  setIsOpen: (open: boolean) => void;
-  setBookId: (id: string) => void;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setBookId: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export default function BookSearchedList({ searchedBooks, setBookId, setIsOpen }: Props) {
