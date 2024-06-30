@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { FieldErrors, UseFormRegister, UseFormReset, useFormContext } from 'react-hook-form';
 
 import { SelectedBook } from '@/types/book';
-import { THost } from '@/types/host';
+import { HostFormDataType } from '@/types/host';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import BookSearchModal from './BookSearchModal';
@@ -11,33 +11,36 @@ import NoImg from '../../../public/svgs/noImg.svg';
 
 interface Props {
   data?: SelectedBook;
-  register: UseFormRegister<THost>;
-  setValue: UseFormSetValue<THost>;
   setBookId: React.Dispatch<React.SetStateAction<string>>;
-  errors: FieldErrors<Omit<THost, 'cover'>>;
 }
-export default function BookDetailInfo({ data, setBookId, register, setValue, errors }: Props) {
+
+interface FormContextType {
+  register: UseFormRegister<HostFormDataType>;
+  reset: UseFormReset<HostFormDataType>;
+  errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+}
+
+export default function BookDetailInfo({ data, setBookId }: Props) {
   const [cover, setCover] = useState(NoImg);
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
+
+  const { register, reset, errors } = useFormContext<FormContextType>();
 
   const MAX_PAGE = 3000;
   const MIN_PAGE = 1;
 
   useEffect(() => {
-    if (!isReset && data) {
-      setValue('cover', data.cover ?? NoImg);
-      setValue('title', data.title ?? '');
-      setValue('publisher', data.publisher ?? '');
-      setValue('itemPage', data.subInfo.itemPage ?? 0);
-      setCover(data?.cover);
-    }
-
+    if (data) setCover(data.cover);
     if (isReset) {
-      setValue('cover', NoImg);
-      setValue('title', '');
-      setValue('publisher', '');
-      setValue('itemPage', 0);
+      reset((prev) => ({
+        ...prev,
+        cover: NoImg,
+        title: '',
+        publisher: '',
+        itemPage: 0,
+      }));
+
       setCover(NoImg);
       setBookId('');
       setIsReset(false);
