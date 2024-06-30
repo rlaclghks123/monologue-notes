@@ -1,16 +1,8 @@
 import { headers } from 'next/headers';
 
-import CardList from '@/components/CardList';
-import getBestSeller from '../../service/getBestSeller';
-
-interface BestSeller {
-  itemId: number;
-  link: string;
-  cover: string;
-  title: string;
-  author: string;
-  isbn13: string;
-}
+import { BestSeller } from '@/types/book';
+import getBestSeller from '@/service/getBestSeller';
+import CardList from './CardList';
 
 export default async function BestSellerBanner() {
   const headersList = headers();

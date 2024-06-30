@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import Left from '../../public/svgs/angleLeft.svg';
-import Right from '../../public/svgs/angleRight.svg';
+import Left from '../../../../public/svgs/angleLeft.svg';
+import Right from '../../../../public/svgs/angleRight.svg';
 
-import FullSquare from '../../public/svgs/fullSquare.svg';
-import EmptySquare from '../../public/svgs/emptySquare.svg';
+import FullSquare from '../../../../public/svgs/fullSquare.svg';
+import EmptySquare from '../../../../public/svgs/emptySquare.svg';
 
 interface Props {
   size: number;

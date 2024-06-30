@@ -3,16 +3,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
+import { BestSeller } from '@/types/book';
 import Carousel from './Carousel';
-
-interface BestSeller {
-  itemId: number;
-  link: string;
-  cover: string;
-  title: string;
-  author: string;
-  isbn13: string;
-}
 
 interface Props {
   item: BestSeller[];
