@@ -15,7 +15,7 @@ const DATA = [
   },
 ];
 
-export default function HomeBanner() {
+export default function Banner() {
   return (
     <section className="mt-5 box-border flex h-52 w-full justify-between rounded-lg bg-peach-fuzz">
       <div className="flex h-full w-1/2 flex-col items-center justify-center">

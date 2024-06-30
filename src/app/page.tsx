@@ -1,11 +1,5 @@
-import BestSellerBanner from './container/BestSellerBanner';
-import HomeBanner from './container/HomeBanner';
+import Home from '@/container/Home';
 
-export default async function Home() {
-  return (
-    <div className="w-ful h-full">
-      <HomeBanner />
-      <BestSellerBanner />
-    </div>
-  );
+export default async function HomePage() {
+  return <Home />;
 }

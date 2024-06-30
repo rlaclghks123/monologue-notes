@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 import { FieldErrors, UseFormRegister, UseFormSetValue } from 'react-hook-form';
 
 import { SelectedBook } from '@/types/book';
+import { THost } from '@/types/host';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import { THost } from '@/types/host';
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
@@ -18,7 +18,7 @@ interface Props {
   setBookId: React.Dispatch<React.SetStateAction<string>>;
   errors: FieldErrors<Omit<THost, 'cover'>>;
 }
-export default function BookDetail({ data, setBookId, register, setValue, errors }: Props) {
+export default function BookDetailInfo({ data, setBookId, register, setValue, errors }: Props) {
   const [cover, setCover] = useState(NoImg);
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);

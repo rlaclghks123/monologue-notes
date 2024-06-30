@@ -1,16 +1,15 @@
-'use client';
-
+import useBookDetail from '@/service/getBookDetail';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import Button from '@/components/Button';
 import { THost } from '@/types/host';
-import BookDetailTextArea from '../container/BookDetailTextArea';
-import BookDetail from '../container/BookDetail';
-import useBookDetail from '../service/getBookDetail';
+import Button from '@/components/Button';
 import NoImg from '../../../public/svgs/noImg.svg';
 
-export default function Host() {
+import BookDetail from './BookDetail';
+import BookDetailTextArea from './BookDetailTextArea';
+
+export default function Post() {
   const [bookId, setBookId] = useState('');
   const { data: bookDetail } = useBookDetail(bookId);
   const {
@@ -33,7 +32,7 @@ export default function Host() {
 
   function onSubmit(data: THost) {
     console.log(data);
-    // supabase 연결 및 처리 
+    // supabase 연결 및 처리
   }
 
   return (

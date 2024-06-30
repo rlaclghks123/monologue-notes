@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 
 import CardList from '@/components/CardList';
-import getBestSeller from '../service/getBestSeller';
+import getBestSeller from '../../service/getBestSeller';
 
 interface BestSeller {
   itemId: number;

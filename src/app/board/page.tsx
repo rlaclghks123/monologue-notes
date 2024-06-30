@@ -1,12 +1,5 @@
-import Link from 'next/link';
+import Board from '@/container/Board';
 
-export default function Board() {
-  return (
-    <div>
-      board
-      <Link href="/host" className="ml-10 bg-red-300">
-        글쓰기
-      </Link>
-    </div>
-  );
+export default function BoardPage() {
+  return <Board />;
 }
