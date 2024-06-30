@@ -1,5 +1,3 @@
-'use client';
-
 import { THost } from '@/types/host';
 import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
 

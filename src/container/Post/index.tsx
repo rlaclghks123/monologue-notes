@@ -1,3 +1,5 @@
+'use client';
+
 import useBookDetail from '@/service/getBookDetail';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
