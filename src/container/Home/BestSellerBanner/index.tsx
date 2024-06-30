@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 
-import { BestSeller } from '@/types/book';
 import getBestSeller from '@/service/getBestSeller';
+import { BestSeller } from '@/types/book';
 import CardList from './CardList';
 
 export default async function BestSellerBanner() {

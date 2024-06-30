@@ -3,14 +3,14 @@
 import { useEffect, useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 
-import { HostFormDataType } from '@/types/host';
-import { SelectedBook } from '@/types/book';
-import useBookDetail from '@/service/getBookDetail';
 import Button from '@/components/Button';
-import NoImg from '../../../public/svgs/noImg.svg';
+import useBookDetail from '@/service/getBookDetail';
+import { SelectedBook } from '@/types/book';
+import { HostFormDataType } from '@/types/host';
 
 import BookDetail from './BookDetail';
 import BookDetailTextArea from './BookDetailTextArea';
+import NoImg from '../../../public/svgs/noImg.svg';
 
 export default function Post() {
   const [bookId, setBookId] = useState('');

@@ -12,6 +12,31 @@
       {
         "labelAttributes": ["htmlFor"]
       }
+    ],
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "type"],
+        "pathGroups": [
+          {
+            "pattern": "react+(|-native)",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "react+(|-native)",
+            "group": "builtin",
+            "position": "before"
+          }
+        ],
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroupsExcludedImportTypes": ["builtin"]
+      }
     ]
-  }
+  },
+
+  "plugins": ["import"]
 }

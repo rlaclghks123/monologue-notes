@@ -1,5 +1,5 @@
-import { THost } from '@/types/host';
 import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
+import { THost } from '@/types/host';
 
 interface Props {
   title: string;

@@ -1,5 +1,5 @@
-import type { Metadata } from 'next';
 import Navigation from '@/components/Navigation';
+import type { Metadata } from 'next';
 
 import '../styles/reset.css';
 import '../styles/global.css';
