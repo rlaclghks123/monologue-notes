@@ -12,14 +12,10 @@ interface BestSeller {
   isbn13: string;
 }
 
-interface BookApi {
-  item: BestSeller[];
-}
-
 export default async function BestSellerBanner() {
   const headersList = headers();
   const curPage = Number(headersList.get('pathname')?.split('page=')[1]) || 1;
-  const { item }: BookApi = await getBestSeller(curPage);
+  const { item }: { item: BestSeller[] } = await getBestSeller(curPage);
 
   return (
     <div className="w-ful mt-11">
