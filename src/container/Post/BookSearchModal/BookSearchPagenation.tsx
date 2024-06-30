@@ -12,6 +12,8 @@ export default function BookSearchPagenation({ totalCount, limit, curPage, setCu
   const { handlePrev, handleClickPage, handleNext, pagenationArr, curPageGroup, numberOfPages } =
     usePagenation({ totalCount, limit, curPage, setCurPage });
 
+  const isCurPage = (idx) => ((curPage - 1) % limit) + 1 === idx + 1;
+
   return (
     <div className="mt-2 w-full">
       <div className="flex items-center justify-center gap-2">
@@ -27,7 +29,7 @@ export default function BookSearchPagenation({ totalCount, limit, curPage, setCu
             key={number}
             text={String(number)}
             onClick={() => handleClickPage(number)}
-            className={`w-6 rounded-md hover:bg-gray-200 ${((curPage - 1) % 9) + 1 === idx + 1 ? 'bg-gray-200' : ''} `}
+            className={`w-6 rounded-md hover:bg-gray-200 ${isCurPage(idx) && 'bg-gray-200'} `}
           />
         ))}
 

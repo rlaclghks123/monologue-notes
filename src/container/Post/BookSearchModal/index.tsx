@@ -43,12 +43,6 @@ export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props)
 
       <div className="flex h-[10%] justify-center gap-10">
         <Button
-          text="저장"
-          onClick={() => setIsOpen(false)}
-          className="rounded-lg bg-gray-200 p-2"
-        />
-
-        <Button
           text="닫기"
           onClick={() => setIsOpen(false)}
           className="rounded-lg bg-gray-200 p-2"

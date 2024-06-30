@@ -16,6 +16,7 @@ export default function Carousel({ size, curPage }: Props) {
   const totalPages = 5;
   const prevPage = curPage === 1 ? totalPages : curPage - 1;
   const nextPage = curPage === totalPages ? 1 : curPage + 1;
+  const isCurPage = (idx) => curPage === idx + 1;
 
   return (
     <>
@@ -33,7 +34,7 @@ export default function Carousel({ size, curPage }: Props) {
         {Array.from({ length: size }, (_, idx) => (
           <Link key={idx} href={`/?page=${idx + 1}`} type="button" className="border-gray-100 p-2">
             <Image
-              src={curPage === idx + 1 ? FullSquare : EmptySquare}
+              src={isCurPage(idx) ? FullSquare : EmptySquare}
               alt="pagenation box"
               className="h-3 w-3"
             />

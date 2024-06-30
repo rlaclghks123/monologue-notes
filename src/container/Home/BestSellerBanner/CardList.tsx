@@ -12,6 +12,8 @@ interface Props {
 }
 
 export default function CardList({ item, curPage }: Props) {
+  const getAuthor = (data) => data.author.split(',')[0];
+
   return (
     <div className="relative">
       <div className=" overflow-hidden">
@@ -26,7 +28,7 @@ export default function CardList({ item, curPage }: Props) {
                 className="h-44 w-36 rounded-xl"
               />
               <p className="w-36  truncate">{data.title}</p>
-              <p className="w-36 text-xs text-gray-500">{data.author.split(',')[0]}</p>
+              <p className="w-36 text-xs text-gray-500">{getAuthor(data)}</p>
             </Link>
           ))}
         </div>
