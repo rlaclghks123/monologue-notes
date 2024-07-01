@@ -12,6 +12,7 @@ export default function BookSearch({ query, setQuery, setCurPage }: Props) {
 
   const handleSearchClick = async () => {
     setQuery(curQuery);
+    setCurQuery('');
   };
 
   const handleResetClick = () => {

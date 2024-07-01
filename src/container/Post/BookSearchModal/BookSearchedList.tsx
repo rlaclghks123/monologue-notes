@@ -16,7 +16,9 @@ export default function BookSearchedList({ searchedBooks, setBookId, setIsOpen }
   return (
     <div className="h-[80%] w-full px-3 py-1">
       <div className="h-full overflow-hidden ">
-        {!searchedBooks && <div className="mt-10 text-center">검색 결과 없음</div>}
+        {(!searchedBooks || searchedBooks.length === 0) && (
+          <div className="mt-10 text-center">검색 결과 없음</div>
+        )}
         {searchedBooks?.map((data) => (
           <div key={`${data?.itemId}`}>
             <Button
