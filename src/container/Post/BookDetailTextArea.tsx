@@ -1,16 +1,23 @@
-import { FieldErrors, UseFormRegister, UseFormWatch } from 'react-hook-form';
-import { THost } from '@/types/host';
+import { FieldErrors, UseFormRegister, useFormContext } from 'react-hook-form';
 
 interface Props {
   title: string;
   labelId: 'beforeRead' | 'writerSay' | 'afterRead';
-  register: UseFormRegister<THost>;
-  errors: FieldErrors<Omit<THost, 'cover'>>;
-  watch: UseFormWatch<THost>;
 }
 
-export default function BookDetailTextArea({ title, labelId, watch, register, errors }: Props) {
+interface FormContextType {
+  register: UseFormRegister<HostFormDataType>;
+  reset: UseFormReset<HostFormDataType>;
+  errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+}
+
+export default function BookDetailTextArea({ title, labelId }: Props) {
   const max = 1000;
+  const {
+    register,
+    watch,
+    formState: { errors },
+  } = useFormContext<FormContextType>();
 
   return (
     <div className="my-10 flex flex-col">

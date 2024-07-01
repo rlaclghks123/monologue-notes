@@ -1,5 +1,5 @@
-import { IBookDetail } from '@/types/book';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { IBookDetail } from '@/types/book';
 
 async function getSearchBook(query: string, curPage: number, limit: number) {
   const BASE_URL = '/api/ttb/api/ItemSearch.aspx';

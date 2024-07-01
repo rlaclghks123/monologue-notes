@@ -4,8 +4,10 @@ import { FieldErrors, UseFormRegister, UseFormReset, useFormContext } from 'reac
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
+
 import { SelectedBook } from '@/types/book';
 import { HostFormDataType } from '@/types/host';
+
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
@@ -25,7 +27,11 @@ export default function BookDetailInfo({ data, setBookId }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
 
-  const { register, reset, errors } = useFormContext<FormContextType>();
+  const {
+    register,
+    reset,
+    formState: { errors },
+  } = useFormContext<FormContextType>();
 
   const MAX_PAGE = 3000;
   const MIN_PAGE = 1;

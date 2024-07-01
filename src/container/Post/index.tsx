@@ -15,14 +15,7 @@ import NoImg from '../../../public/svgs/noImg.svg';
 export default function Post() {
   const [bookId, setBookId] = useState('');
   const { data: bookDetail } = useBookDetail(bookId);
-  const {
-    handleSubmit,
-    register,
-    watch,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm({
+  const methods = useForm({
     defaultValues: {
       cover: NoImg ?? '',
       title: '',
@@ -33,6 +26,8 @@ export default function Post() {
       afterRead: '',
     },
   });
+
+  const { handleSubmit, setValue } = methods;
 
   const setMultipleValues = (details: SelectedBook) => {
     const fields = {
@@ -57,33 +52,13 @@ export default function Post() {
   }
 
   return (
-    <FormProvider {...{ reset, register, errors }}>
+    <FormProvider {...methods}>
       <form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
         <BookDetail data={bookDetail} setBookId={setBookId} />
 
-        <BookDetailTextArea
-          title="책을 통해 얻고 싶은 인사이트"
-          labelId="beforeRead"
-          register={register}
-          watch={watch}
-          errors={errors}
-        />
-
-        <BookDetailTextArea
-          title="저자가 전달하는 내용"
-          labelId="writerSay"
-          register={register}
-          watch={watch}
-          errors={errors}
-        />
-
-        <BookDetailTextArea
-          title="독서 후 정리 & 느낀점"
-          labelId="afterRead"
-          register={register}
-          watch={watch}
-          errors={errors}
-        />
+        <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="beforeRead" />
+        <BookDetailTextArea title="저자가 전달하는 내용" labelId="writerSay" />
+        <BookDetailTextArea title="독서 후 정리 & 느낀점" labelId="afterRead" />
 
         <div className="flex w-full justify-center">
           <Button text="저장" type="submit" className=" rounded-md bg-white p-2" />

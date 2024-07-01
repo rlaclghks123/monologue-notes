@@ -1,5 +1,5 @@
-import { SelectedBook } from '@/types/book';
 import { useQuery } from '@tanstack/react-query';
+import { SelectedBook } from '@/types/book';
 
 async function detailBook(isbn: string) {
   const BASE_URL = '/api/ttb/api/ItemLookUp.aspx';
