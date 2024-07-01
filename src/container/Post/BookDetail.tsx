@@ -19,7 +19,9 @@ interface Props {
 interface FormContextType {
   register: UseFormRegister<HostFormDataType>;
   reset: UseFormReset<HostFormDataType>;
-  errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+  forState: {
+    errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+  };
 }
 
 export default function BookDetailInfo({ data, setBookId }: Props) {

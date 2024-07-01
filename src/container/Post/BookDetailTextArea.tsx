@@ -8,7 +8,9 @@ interface Props {
 interface FormContextType {
   register: UseFormRegister<HostFormDataType>;
   reset: UseFormReset<HostFormDataType>;
-  errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+  formState: {
+    errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+  };
 }
 
 export default function BookDetailTextArea({ title, labelId }: Props) {
