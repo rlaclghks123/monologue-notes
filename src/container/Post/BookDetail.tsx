@@ -6,7 +6,7 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 
 import { SelectedBook } from '@/types/book';
-import { HostFormDataType } from '@/types/host';
+import { PostFormDataType } from '@/types/post';
 
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
@@ -17,10 +17,10 @@ interface Props {
 }
 
 interface FormContextType {
-  register: UseFormRegister<HostFormDataType>;
-  reset: UseFormReset<HostFormDataType>;
+  register: UseFormRegister<PostFormDataType>;
+  reset: UseFormReset<PostFormDataType>;
   forState: {
-    errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+    errors: FieldErrors<Omit<PostFormDataType, 'cover'>>;
   };
 }
 

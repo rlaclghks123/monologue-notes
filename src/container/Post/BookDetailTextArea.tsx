@@ -1,4 +1,5 @@
 import { FieldErrors, UseFormRegister, useFormContext } from 'react-hook-form';
+import { PostFormDataType } from '@/types/post';
 
 interface Props {
   title: string;
@@ -6,10 +7,10 @@ interface Props {
 }
 
 interface FormContextType {
-  register: UseFormRegister<HostFormDataType>;
-  reset: UseFormReset<HostFormDataType>;
+  register: UseFormRegister<PostFormDataType>;
+  reset: UseFormReset<PostFormDataType>;
   formState: {
-    errors: FieldErrors<Omit<HostFormDataType, 'cover'>>;
+    errors: FieldErrors<Omit<PostFormDataType, 'cover'>>;
   };
 }
 

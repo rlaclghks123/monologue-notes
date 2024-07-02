@@ -1,6 +1,6 @@
 import { SelectedBook } from './book';
 
-export type HostFormDataType = Omit<SelectedBook, 'subInfo'> & {
+export type PostFormDataType = Omit<SelectedBook, 'subInfo'> & {
   itemPage: number;
   beforeRead: string;
   writerSay: string;
