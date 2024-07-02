@@ -1,12 +1,14 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import Button from '@/components/Button';
+import createPost from '@/service/createPost';
 import useBookDetail from '@/service/getBookDetail';
 import { SelectedBook } from '@/types/book';
-import { HostFormDataType } from '@/types/host';
+import { PostFormDataType } from '@/types/post';
 
 import BookDetail from './BookDetail';
 import BookDetailTextArea from './BookDetailTextArea';
@@ -28,6 +30,7 @@ export default function Post() {
   });
 
   const { handleSubmit, setValue } = methods;
+  const router = useRouter();
 
   const setMultipleValues = (details: SelectedBook) => {
     const fields = {
@@ -38,7 +41,7 @@ export default function Post() {
     };
 
     Object.keys(fields).forEach((field) => {
-      setValue(field as keyof HostFormDataType, fields[field as keyof typeof fields]);
+      setValue(field as keyof PostFormDataType, fields[field as keyof typeof fields]);
     });
   };
 
@@ -46,10 +49,21 @@ export default function Post() {
     if (bookDetail) setMultipleValues(bookDetail);
   }, [bookDetail]);
 
-  function onSubmit(data: HostFormDataType) {
-    console.log(data);
-    // supabase 연결 및 처리
-  }
+  const onSubmit = useCallback(async (data: PostFormDataType) => {
+    const postResult = {
+      cover: data.cover,
+      title: data.title,
+      publisher: data.publisher,
+      itemPage: data.itemPage,
+      beforeRead: data.beforeRead,
+      writerSay: data.writerSay,
+      afterRead: data.afterRead,
+    };
+
+    await createPost(postResult);
+    alert('성공적으로 글이 추가되었습니다.');
+    router.push('/board');
+  }, []);
 
   return (
     <FormProvider {...methods}>
