@@ -8,7 +8,7 @@ interface Props {
   setCurPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-export default function BookSearchPagenation({ totalCount, limit, curPage, setCurPage }: Props) {
+export default function Pagenation({ totalCount, limit, curPage, setCurPage }: Props) {
   const { handlePrev, handleClickPage, handleNext, pagenationArr, curPageGroup, numberOfPages } =
     usePagenation({ totalCount, limit, curPage, setCurPage });
 

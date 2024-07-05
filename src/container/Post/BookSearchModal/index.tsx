@@ -5,7 +5,7 @@ import Modal from '@/components/Modal';
 
 import BookSearch from './BookSearch';
 import BookSearchedList from './BookSearchedList';
-import BookSearchPagenation from './BookSearchPagenation';
+import Pagenation from '../../../components/Pagenation';
 import useSearchBooks from '../../../service/getSearchBooks';
 
 interface Props {
@@ -32,7 +32,7 @@ export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props)
           setIsOpen={setIsOpen}
         />
 
-        <BookSearchPagenation
+        <Pagenation
           totalCount={searchedBooks?.totalResults}
           limit={limit}
           curPage={curPage}
