@@ -50,8 +50,11 @@ export default function Post() {
   }, [bookDetail]);
 
   const onSubmit = useCallback(async (data: PostFormDataType) => {
+    const coverSrc = typeof data.cover === 'string' ? data.cover : data.cover.src;
+    const cover = coverSrc === NoImg.src ? '' : data.cover;
+
     const postResult = {
-      cover: data.cover,
+      cover,
       title: data.title,
       publisher: data.publisher,
       itemPage: data.itemPage,

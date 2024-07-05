@@ -1,8 +1,10 @@
+import { ImageProps } from 'next/image';
+
 export interface IBookDetail {
   totalResults: number;
   item: {
     title: string;
-    cover: string;
+    cover: string | ImageProps;
     publisher: string;
     isbn13: string;
     itemId: number;
@@ -20,7 +22,7 @@ export type SelectedBook = Pick<
 export interface BestSeller {
   itemId: number;
   link: string;
-  cover: string;
+  cover: string | ImageProps;
   title: string;
   author: string;
   isbn13: string;

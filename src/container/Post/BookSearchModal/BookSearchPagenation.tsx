@@ -12,7 +12,7 @@ export default function BookSearchPagenation({ totalCount, limit, curPage, setCu
   const { handlePrev, handleClickPage, handleNext, pagenationArr, curPageGroup, numberOfPages } =
     usePagenation({ totalCount, limit, curPage, setCurPage });
 
-  const isCurPage = (idx) => ((curPage - 1) % limit) + 1 === idx + 1;
+  const isCurPage = (idx: number) => ((curPage - 1) % limit) + 1 === idx + 1;
 
   return (
     <div className="mt-2 w-full">

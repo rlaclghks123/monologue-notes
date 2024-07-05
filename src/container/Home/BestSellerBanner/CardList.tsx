@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function CardList({ item, curPage }: Props) {
-  const getAuthor = (data) => data.author.split(',')[0];
+  const getAuthor = (data: BestSeller) => data.author.split(',')[0];
 
   return (
     <div className="relative">
