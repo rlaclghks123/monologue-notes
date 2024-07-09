@@ -14,4 +14,5 @@ export type GetPosts = Omit<SelectedBook, 'subInfo'> & {
   beforeRead: string;
   writerSay: string;
   afterRead: string;
+  user_id: string | undefined;
 };
