@@ -1,3 +1,4 @@
+import { headers } from 'next/headers';
 import Link from 'next/link';
 
 const CATEGORY = [
@@ -5,9 +6,12 @@ const CATEGORY = [
   { id: 2, name: '나의 기록', link: '/mypage' },
 ];
 
-export default function Navigation() {
+export default async function Navigation() {
+  const isUser = headers().get('isUser') === 'true';
+  const loginText = isUser ? '로그아웃' : '로그인';
+
   return (
-    <header className="fixed flex h-16 w-screen items-center justify-center bg-white px-52">
+    <header className="fixed flex h-16 w-screen items-center justify-between bg-white px-52">
       <div className="flex h-16 w-2/6 items-center justify-between">
         <Link href="/" className="text-2xl font-bold">
           독백노트 📚
@@ -22,10 +26,9 @@ export default function Navigation() {
           </ul>
         </nav>
       </div>
-      <div className="flex w-2/6 justify-center">
-        <input />
-      </div>
-      <div className="flex w-2/6 justify-end">로그인</div>
+      <Link href="/auth" className="flex w-2/6 justify-end">
+        {loginText}
+      </Link>
     </header>
   );
 }

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 import usePosts from '@/service/getPosts';
+import { useUser } from '@/service/user';
 import { GetPosts } from '@/types/post';
 import BoardList from './BoardList';
 import Pagenation from '../../components/Pagenation';
@@ -17,22 +18,26 @@ interface IPostData {
 }
 
 export default function Board() {
-  const [curPost, setCurPost] = useState(1);
   const limit = 8;
-  const { data, isLoading }: IPostData = usePosts({
+  const [curPost, setCurPost] = useState(1);
+  const { data: userData } = useUser();
+  const { data: postData, isLoading }: IPostData = usePosts({
     from: (curPost - 1) * (limit + 1),
     to: (curPost - 1) * (limit + 1) + limit,
   });
+
   if (isLoading) return <div>로딩중..</div>;
 
   return (
     <div className="h-screen-without-nav pb-20 pt-10">
-      <Link href="/post" className="">
-        글쓰기
-      </Link>
-      <BoardList data={data?.data ?? []} />
+      {userData && (
+        <Link href="/post" className="">
+          글쓰기
+        </Link>
+      )}
+      <BoardList data={postData?.data ?? []} />
       <Pagenation
-        totalCount={data?.count ?? 0}
+        totalCount={postData?.count ?? 0}
         limit={limit}
         curPage={curPost}
         setCurPage={setCurPost}

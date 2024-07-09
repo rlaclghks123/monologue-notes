@@ -7,6 +7,8 @@ import { useForm, FormProvider } from 'react-hook-form';
 import Button from '@/components/Button';
 import createPost from '@/service/createPost';
 import useBookDetail from '@/service/getBookDetail';
+
+import { useUser } from '@/service/user';
 import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
 
@@ -16,6 +18,7 @@ import NoImg from '../../../public/svgs/noImg.svg';
 
 export default function Post() {
   const [bookId, setBookId] = useState('');
+  const { data: userData } = useUser();
   const { data: bookDetail } = useBookDetail(bookId);
   const methods = useForm({
     defaultValues: {
@@ -41,13 +44,23 @@ export default function Post() {
     };
 
     Object.keys(fields).forEach((field) => {
-      setValue(field as keyof PostFormDataType, fields[field as keyof typeof fields]);
+      setValue(
+        field as keyof Omit<PostFormDataType, 'user_id'>,
+        fields[field as keyof typeof fields],
+      );
     });
   };
 
   useEffect(() => {
     if (bookDetail) setMultipleValues(bookDetail);
   }, [bookDetail]);
+
+  useEffect(() => {
+    if (!userData) {
+      alert('로그인 후 이용 가능합니다.');
+      window.location.href = '/';
+    }
+  }, []);
 
   const onSubmit = useCallback(async (data: PostFormDataType) => {
     const coverSrc = typeof data.cover === 'string' ? data.cover : data.cover.src;
