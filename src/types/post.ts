@@ -5,6 +5,8 @@ export type PostFormDataType = Omit<SelectedBook, 'subInfo'> & {
   beforeRead: string;
   writerSay: string;
   afterRead: string;
+  user_id?: string;
+  id?: number;
 };
 
 export type GetPosts = Omit<SelectedBook, 'subInfo'> & {
@@ -14,5 +16,5 @@ export type GetPosts = Omit<SelectedBook, 'subInfo'> & {
   beforeRead: string;
   writerSay: string;
   afterRead: string;
-  user_id: string | undefined;
+  user_id?: string;
 };

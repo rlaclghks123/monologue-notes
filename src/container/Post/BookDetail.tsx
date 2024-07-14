@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+
+import Image, { ImageProps } from 'next/image';
 import { FieldErrors, UseFormRegister, UseFormReset, useFormContext } from 'react-hook-form';
 
 import Button from '@/components/Button';
@@ -12,6 +13,7 @@ import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
 interface Props {
+  coverImg: string | ImageProps;
   data?: SelectedBook;
   setBookId: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -24,8 +26,8 @@ interface FormContextType {
   };
 }
 
-export default function BookDetailInfo({ data, setBookId }: Props) {
-  const [cover, setCover] = useState(NoImg);
+export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
+  const [cover, setCover] = useState(coverImg ?? NoImg);
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
 

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useDeletePost } from '@/service/deletePost';
 import { useUser } from '@/service/user';
 import { GetPosts } from '@/types/post';
@@ -43,12 +44,12 @@ export default function BoardList({ data }: Props) {
             <p className="w-[30%] truncate ">{`출판사 : ${item.publisher}`}</p>
             <p className="w-[10%] ">
               {userData?.id === item?.user_id && (
-                <div className="flex h-full justify-between">
-                  <button type="button">수정</button>
+                <span className="flex h-full justify-between">
+                  <Link href={`post/${item.id}`}>수정</Link>
                   <button type="button" onClick={() => handleDeleteBtn(item.id)}>
                     🗑️
                   </button>
-                </div>
+                </span>
               )}
             </p>
           </li>
