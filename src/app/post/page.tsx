@@ -7,10 +7,10 @@ export default function Host() {
     cover: '',
     title: '',
     publisher: '',
-    itemPage: 0,
-    beforeRead: '',
-    writerSay: '',
-    afterRead: '',
+    item_page: 0,
+    before_read: '',
+    writer_say: '',
+    after_read: '',
   };
 
   return <Post defaultData={defaultData} type="CREATE" />;

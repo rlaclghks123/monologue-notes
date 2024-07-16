@@ -9,7 +9,7 @@ export interface IBookDetail {
     isbn13: string;
     itemId: number;
     subInfo: {
-      itemPage: number;
+      item_page: number;
     };
   }[];
 }
@@ -20,7 +20,7 @@ export type SelectedBook = Pick<
 >;
 
 export interface BestSeller {
-  itemId: number;
+  item_id: number;
   link: string;
   cover: string | ImageProps;
   title: string;

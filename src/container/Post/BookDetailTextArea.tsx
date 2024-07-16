@@ -3,7 +3,7 @@ import { PostFormDataType } from '@/types/post';
 
 interface Props {
   title: string;
-  labelId: 'beforeRead' | 'writerSay' | 'afterRead';
+  labelId: 'before_read' | 'writer_say' | 'after_read';
 }
 
 interface FormContextType {

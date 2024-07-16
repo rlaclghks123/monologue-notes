@@ -48,7 +48,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
         cover: '',
         title: '',
         publisher: '',
-        itemPage: 0,
+        item_page: 0,
       }));
 
       setCover('');
@@ -103,9 +103,9 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
             <Input
               label="쪽수"
               type="number"
-              id="itemPage"
+              id="item_page"
               placeholder="페이지수를 입력해주세요"
-              {...register('itemPage', {
+              {...register('item_page', {
                 required: '페이지는 필수 입력 항목입니다',
                 min: { value: MIN_PAGE, message: '1 이상의 숫자만 입력 가능합니다' },
                 max: {
@@ -113,7 +113,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
                   message: '3000 이하의 숫자만 입력 가능합니다',
                 },
               })}
-              errorMessage={errors?.itemPage?.message}
+              errorMessage={errors?.item_page?.message}
             />
           </div>
         </div>
