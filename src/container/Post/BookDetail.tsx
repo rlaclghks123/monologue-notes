@@ -27,7 +27,7 @@ interface FormContextType {
 }
 
 export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
-  const [cover, setCover] = useState(coverImg ?? NoImg);
+  const [cover, setCover] = useState(coverImg ?? '');
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
 
@@ -45,13 +45,13 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
     if (isReset) {
       reset((prev) => ({
         ...prev,
-        cover: NoImg,
+        cover: '',
         title: '',
         publisher: '',
         itemPage: 0,
       }));
 
-      setCover(NoImg);
+      setCover('');
       setBookId('');
       setIsReset(false);
     }
@@ -70,14 +70,18 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
         </div>
 
         <div className="flex w-full justify-center">
-          <Image
-            src={cover}
-            alt="책 정보"
-            width={150}
-            height={160}
-            priority
-            className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
-          />
+          {cover ? (
+            <Image
+              src={cover}
+              alt="책 정보"
+              width={150}
+              height={160}
+              priority
+              className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
+            />
+          ) : (
+            <NoImg className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200" />
+          )}
 
           <div className="flex flex-col justify-evenly gap-2 ">
             <Input

@@ -1,9 +1,10 @@
+'use client';
+
 import Post from '@/container/Post';
-import NoImg from '../../../public/svgs/noImg.svg';
 
 export default function Host() {
   const defaultData = {
-    cover: NoImg ?? '',
+    cover: '',
     title: '',
     publisher: '',
     itemPage: 0,
@@ -11,5 +12,6 @@ export default function Host() {
     writerSay: '',
     afterRead: '',
   };
+
   return <Post defaultData={defaultData} type="CREATE" />;
 }
