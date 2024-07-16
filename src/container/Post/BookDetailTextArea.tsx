@@ -15,7 +15,7 @@ interface FormContextType {
 }
 
 export default function BookDetailTextArea({ title, labelId }: Props) {
-  const max = 1000;
+  const max = 10000;
   const {
     register,
     watch,
