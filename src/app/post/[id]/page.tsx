@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export default function PostDetail({ params: { id } }: Props) {
+export default function PostUpdate({ params: { id } }: Props) {
   const { data, isLoading } = usePostDetail(id);
 
   if (isLoading) return <div>로딩중...</div>;

@@ -33,11 +33,11 @@ export default function BoardList({ data }: Props) {
             key={item.id}
             className="flex w-full items-center  justify-between border border-black  hover:bg-gray-100 "
           >
-            <Link href={`post/${item.id}`} className="flex w-[90%] items-center justify-between">
+            <Link href={`detail/${item.id}`} className="flex w-[90%] items-center justify-between">
               <p>{idx + 1}</p>
               {item.cover ? (
                 <Image
-                  src={item.cover}
+                  src={item.cover || NoImg}
                   width={120}
                   height={50}
                   alt="커버 이미지"
@@ -53,7 +53,7 @@ export default function BoardList({ data }: Props) {
               {userData?.id === item?.user_id && (
                 <span className="flex h-full w-full">
                   <Link
-                    href={`update/${item.id}`}
+                    href={`post/${item.id}`}
                     className="flex h-full w-1/2 items-center justify-center hover:text-peach-fuzz"
                   >
                     수정
@@ -62,6 +62,7 @@ export default function BoardList({ data }: Props) {
                     type="button"
                     onClick={(e) => handleDeleteBtn(e, item.id)}
                     className="h-full w-[50%] hover:text-peach-fuzz"
+                    aria-labelledby={`delete-label-${item.id}`}
                   >
                     <TrashBin className="h-5 w-5 hover:fill-peach-fuzz" />
                   </button>
