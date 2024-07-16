@@ -9,6 +9,7 @@ import createPost from '@/service/createPost';
 import useBookDetail from '@/service/getBookDetail';
 import { useUpdatePost } from '@/service/updatePost';
 
+import { useUser } from '@/service/user';
 import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
 
@@ -32,6 +33,7 @@ export default function Post({ defaultData, type }: Props) {
 
   const { handleSubmit, setValue, reset } = methods;
   const router = useRouter();
+  const { data: userData } = useUser();
 
   useEffect(() => {
     reset(defaultData);
@@ -42,7 +44,7 @@ export default function Post({ defaultData, type }: Props) {
       cover: details.cover,
       title: details.title,
       publisher: details.publisher,
-      itemPage: details.subInfo.itemPage,
+      item_page: details.subInfo.itemPage,
     };
 
     Object.keys(fields).forEach((field) => {
@@ -63,6 +65,8 @@ export default function Post({ defaultData, type }: Props) {
     const postResult = {
       ...data,
       cover,
+      nickname: userData?.user_metadata.name,
+      avatar_url: userData?.user_metadata.avatar_url,
     };
 
     if (type === 'CREATE') {
@@ -83,9 +87,9 @@ export default function Post({ defaultData, type }: Props) {
       <form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
         <BookDetail data={bookDetail} setBookId={setBookId} coverImg={defaultData.cover} />
 
-        <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="beforeRead" />
-        <BookDetailTextArea title="저자가 전달하는 내용" labelId="writerSay" />
-        <BookDetailTextArea title="독서 후 정리 & 느낀점" labelId="afterRead" />
+        <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="before_read" />
+        <BookDetailTextArea title="저자가 전달하는 내용" labelId="writer_say" />
+        <BookDetailTextArea title="독서 후 정리 & 느낀점" labelId="after_read" />
 
         <div className="flex w-full justify-center">
           <Button text="저장" type="submit" className=" rounded-md bg-white p-2" />
