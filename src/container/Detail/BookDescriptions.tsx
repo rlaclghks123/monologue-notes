@@ -18,7 +18,7 @@ export default function BookDescriptions({ data }: Props) {
         <div key={id}>
           <TitleDescription key={id}>
             <p>{title}</p>
-            <div className="min-h-52 bg-white p-2">
+            <div className="min-h-52 whitespace-pre-wrap bg-white p-2">
               {data[id as 'before_read' | 'writer_say' | 'after_read']}
             </div>
           </TitleDescription>
