@@ -9,7 +9,7 @@ export interface IBookDetail {
     isbn13: string;
     itemId: number;
     subInfo: {
-      item_page: number;
+      itemPage: number;
     };
   }[];
 }
