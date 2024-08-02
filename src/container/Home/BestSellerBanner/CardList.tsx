@@ -7,19 +7,19 @@ import { BestSeller } from '@/types/book';
 import Carousel from './Carousel';
 
 interface Props {
-  item: BestSeller[];
+  bestSellerList: BestSeller[];
   curPage: number;
 }
 
-export default function CardList({ item, curPage }: Props) {
+export default function CardList({ bestSellerList, curPage }: Props) {
   const getAuthor = (data: BestSeller) => data.author.split(',')[0];
 
   return (
     <div className="relative">
       <div className=" overflow-hidden">
         <div className="flex w-full items-center justify-between ">
-          {item?.map((data) => (
-            <Link key={data.itemId} href={data.link} className="flex flex-col">
+          {bestSellerList?.map((data) => (
+            <Link key={data.item_id} href={data.link} className="flex flex-col">
               <Image
                 src={data.cover}
                 width={130}
