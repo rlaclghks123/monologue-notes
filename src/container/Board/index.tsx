@@ -1,33 +1,21 @@
 'use client';
 
-import { useState } from 'react';
+import { User } from '@supabase/supabase-js';
 import Link from 'next/link';
 
-import usePosts from '@/service/getPosts';
-import { useUser } from '@/service/user';
-import { GetPosts } from '@/types/post';
+import { PostAndCountData } from '@/types/post';
 import BoardList from './BoardList';
 import Pagenation from '../../components/Pagenation';
 
-interface IPostData {
-  data?: {
-    data: GetPosts[] | null;
-    count: number;
-  };
-  isLoading: boolean;
+interface Props {
+  userData?: User | null;
+  postData: PostAndCountData['data'];
+  curPost: number;
+  setCurPost: React.Dispatch<React.SetStateAction<number>>;
+  limit: number;
 }
 
-export default function Board() {
-  const limit = 8;
-  const [curPost, setCurPost] = useState(1);
-  const { data: userData } = useUser();
-  const { data: postData, isLoading }: IPostData = usePosts({
-    from: (curPost - 1) * (limit + 1),
-    to: (curPost - 1) * (limit + 1) + limit,
-  });
-
-  if (isLoading) return <div>로딩중..</div>;
-
+export default function Board({ userData, postData, curPost, setCurPost, limit }: Props) {
   return (
     <div className="h-screen-without-nav pb-20 pt-10">
       {userData && (
@@ -35,7 +23,7 @@ export default function Board() {
           글쓰기
         </Link>
       )}
-      <BoardList data={postData?.data ?? []} />
+      <BoardList posts={postData?.data ?? []} userData={userData} />
       <Pagenation
         totalCount={postData?.count ?? 0}
         limit={limit}

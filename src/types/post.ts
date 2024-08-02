@@ -14,3 +14,10 @@ export type PostFormDataType = Omit<SelectedBook, 'subInfo'> & {
 export type GetPosts = PostFormDataType & {
   created_at: string;
 };
+
+export interface PostAndCountData {
+  data?: {
+    data: GetPosts[] | null;
+    count: number;
+  };
+}
