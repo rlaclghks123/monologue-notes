@@ -1,66 +1,40 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import Button from '@/components/Button';
 import createPost from '@/service/createPost';
-import useBookDetail from '@/service/getBookDetail';
 import { useUpdatePost } from '@/service/updatePost';
 
 import { useUser } from '@/service/user';
-import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
+import { defaultFormData } from '@/utils/constants';
 
 import BookDetail from './BookDetail';
 import BookDetailTextArea from './BookDetailTextArea';
 import NoImg from '../../../public/svgs/noImg.svg';
 
 interface Props {
-  defaultData: PostFormDataType;
+  defaultData?: PostFormDataType;
   type: 'CREATE' | 'UPDATE';
 }
 
-export default function Post({ defaultData, type }: Props) {
-  const [bookId, setBookId] = useState('');
-
-  const { data: bookDetail } = useBookDetail(bookId);
+export default function Post({ defaultData = defaultFormData, type }: Props) {
   const methods = useForm({
     defaultValues: defaultData,
   });
+
+  const { handleSubmit } = methods;
+
   const { mutate: updateMutate } = useUpdatePost();
 
-  const { handleSubmit, setValue, reset } = methods;
   const router = useRouter();
   const { data: userData } = useUser();
 
-  useEffect(() => {
-    reset(defaultData);
-  }, [defaultData, reset]);
-
-  const setMultipleValues = (details: SelectedBook) => {
-    const fields = {
-      cover: details.cover,
-      title: details.title,
-      publisher: details.publisher,
-      item_page: details.subInfo.itemPage,
-    };
-
-    Object.keys(fields).forEach((field) => {
-      setValue(
-        field as keyof Omit<PostFormDataType, 'id' | 'user_id'>,
-        fields[field as keyof typeof fields],
-      );
-    });
-  };
-
-  useEffect(() => {
-    if (bookDetail) setMultipleValues(bookDetail);
-  }, [bookDetail]);
-
   const onSubmit = useCallback(async (data: PostFormDataType) => {
-    const coverSrc = typeof data.cover === 'string' ? data.cover : data.cover.src;
+    const coverSrc = typeof data.cover === 'string' && data.cover;
     const cover = coverSrc === NoImg.src ? '' : data.cover;
     const postResult = {
       ...data,
@@ -85,7 +59,7 @@ export default function Post({ defaultData, type }: Props) {
   return (
     <FormProvider {...methods}>
       <form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
-        <BookDetail data={bookDetail} setBookId={setBookId} coverImg={defaultData.cover} />
+        <BookDetail coverImg={defaultData.cover} />
 
         <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="before_read" />
         <BookDetailTextArea title="저자가 전달하는 내용" labelId="writer_say" />

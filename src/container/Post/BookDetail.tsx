@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
-
-import Image, { ImageProps } from 'next/image';
-import { FieldErrors, UseFormRegister, UseFormReset, useFormContext } from 'react-hook-form';
+import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import Image from 'next/image';
+import { useFormContext } from 'react-hook-form';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
+import useBookDetail from '@/service/getBookDetail';
 import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
 
@@ -13,35 +14,48 @@ import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/svgs/noImg.svg';
 
 interface Props {
-  coverImg: string | ImageProps;
-  data?: SelectedBook;
-  setBookId: React.Dispatch<React.SetStateAction<string>>;
+  coverImg: string | StaticImport;
 }
 
-interface FormContextType {
-  register: UseFormRegister<PostFormDataType>;
-  reset: UseFormReset<PostFormDataType>;
-  forState: {
-    errors: FieldErrors<Omit<PostFormDataType, 'cover'>>;
-  };
-}
-
-export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
+export default function BookDetailInfo({ coverImg }: Props) {
   const [cover, setCover] = useState(coverImg ?? '');
   const [isOpen, setIsOpen] = useState(false);
   const [isReset, setIsReset] = useState(false);
+  const [bookId, setBookId] = useState('');
+  const { data: bookDetail } = useBookDetail(bookId);
 
   const {
     register,
     reset,
+    setValue,
     formState: { errors },
-  } = useFormContext<FormContextType>();
+  } = useFormContext();
+
+  const setMultipleValues = (details: SelectedBook) => {
+    const fields = {
+      cover: details.cover,
+      title: details.title,
+      publisher: details.publisher,
+      item_page: details.subInfo.itemPage,
+    };
+
+    Object.keys(fields).forEach((field) => {
+      setValue(
+        field as keyof Omit<PostFormDataType, 'id' | 'user_id'>,
+        fields[field as keyof typeof fields],
+      );
+    });
+  };
+
+  useEffect(() => {
+    if (bookDetail) setMultipleValues(bookDetail);
+  }, [bookDetail]);
 
   const MAX_PAGE = 3000;
   const MIN_PAGE = 1;
 
   useEffect(() => {
-    if (data) setCover(data.cover);
+    if (bookDetail) setCover(bookDetail.cover);
     if (isReset) {
       reset((prev) => ({
         ...prev,
@@ -55,7 +69,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
       setBookId('');
       setIsReset(false);
     }
-  }, [data, isReset]);
+  }, [bookDetail, isReset]);
 
   return (
     <>
@@ -89,7 +103,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
               id="title"
               placeholder="제목을 입력해주세요"
               {...register('title', { required: '제목은 필수 입력 항목입니다' })}
-              errorMessage={errors?.title?.message}
+              errorMessage={errors?.title?.message as string}
             />
 
             <Input
@@ -97,7 +111,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
               id="publisher"
               placeholder="출판사를 입력해주세요"
               {...register('publisher', { required: '출판사는 필수 입력 항목입니다' })}
-              errorMessage={errors?.publisher?.message}
+              errorMessage={errors?.publisher?.message as string}
             />
 
             <Input
@@ -113,7 +127,7 @@ export default function BookDetailInfo({ coverImg, data, setBookId }: Props) {
                   message: '3000 이하의 숫자만 입력 가능합니다',
                 },
               })}
-              errorMessage={errors?.item_page?.message}
+              errorMessage={errors?.item_page?.message as string}
             />
           </div>
         </div>

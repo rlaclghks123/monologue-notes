@@ -2,7 +2,7 @@ import TitleDescription from '@/components/TitleDescription';
 import { GetPosts } from '@/types/post';
 
 interface Props {
-  data: GetPosts;
+  postDatail: GetPosts;
 }
 
 const DB = [
@@ -11,7 +11,7 @@ const DB = [
   { title: '독서 후 정리 & 느낀점', id: 'after_read' },
 ];
 
-export default function BookDescriptions({ data }: Props) {
+export default function BookDescriptions({ postDatail }: Props) {
   return (
     <>
       {DB.map(({ title, id }) => (
@@ -19,7 +19,7 @@ export default function BookDescriptions({ data }: Props) {
           <TitleDescription key={id}>
             <p>{title}</p>
             <div className="min-h-52 whitespace-pre-wrap bg-white p-2">
-              {data[id as 'before_read' | 'writer_say' | 'after_read']}
+              {postDatail[id as 'before_read' | 'writer_say' | 'after_read']}
             </div>
           </TitleDescription>
         </div>

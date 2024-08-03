@@ -1,17 +1,8 @@
-import { FieldErrors, UseFormRegister, useFormContext } from 'react-hook-form';
-import { PostFormDataType } from '@/types/post';
+import { useFormContext } from 'react-hook-form';
 
 interface Props {
   title: string;
   labelId: 'before_read' | 'writer_say' | 'after_read';
-}
-
-interface FormContextType {
-  register: UseFormRegister<PostFormDataType>;
-  reset: UseFormReset<PostFormDataType>;
-  formState: {
-    errors: FieldErrors<Omit<PostFormDataType, 'cover'>>;
-  };
 }
 
 export default function BookDetailTextArea({ title, labelId }: Props) {
@@ -20,14 +11,14 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
     register,
     watch,
     formState: { errors },
-  } = useFormContext<FormContextType>();
+  } = useFormContext();
 
   return (
     <div className="my-10 flex flex-col">
       <header className="flex justify-between">
         <div>
           <label htmlFor={labelId}>{title}</label>
-          <span className="ml-4 text-xs text-peach-fuzz">{errors[labelId]?.message}</span>
+          <span className="ml-4 text-xs text-peach-fuzz">{errors[labelId]?.message as string}</span>
         </div>
         <p>{`${watch(labelId).length}/${max} 자`}</p>
       </header>

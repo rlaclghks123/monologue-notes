@@ -1,16 +1,21 @@
 import { GetPosts } from '@/types/post';
+
 import BookDescriptions from './BookDescriptions';
+
+import BookReviews from './BookReviews.tsx';
 import Introduce from './Introduce';
 
 interface Props {
-  data: GetPosts;
+  postDatail: GetPosts;
+  reviews: any;
 }
 
-export default function Detail({ data }: Props) {
+export default function Detail({ postDatail, reviews }: Props) {
   return (
     <>
-      <Introduce data={data} />
-      <BookDescriptions data={data} />
+      <Introduce postDatail={postDatail} />
+      <BookDescriptions postDatail={postDatail} />
+      <BookReviews reviews={reviews} />
     </>
   );
 }
