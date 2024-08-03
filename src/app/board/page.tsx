@@ -10,7 +10,7 @@ import { PostAndCountData } from '@/types/post';
 export default function BoardPage() {
   const { data: userData } = useUser();
   const [curPost, setCurPost] = useState(1);
-  const limit = 8;
+  const limit = 9;
 
   const { data: postData }: PostAndCountData = usePosts({
     from: (curPost - 1) * (limit + 1),
@@ -23,7 +23,7 @@ export default function BoardPage() {
       postData={postData}
       curPost={curPost}
       setCurPost={setCurPost}
-      limit={limit}
+      limit={limit + 1}
     />
   );
 }
