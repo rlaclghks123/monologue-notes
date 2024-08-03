@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
+
 import Profile from '@/components/Profile';
 import { useCreateReview } from '@/service/review';
 import { useUser } from '@/service/user';
 
-export default function CreateReviews({ id }: { id: number }) {
+export default function CreateReviews() {
   const { data: user } = useUser();
+  const { id } = useParams();
   const [isFocus, setIsFocus] = useState(false);
   const [content, setContent] = useState('');
   const { mutate } = useCreateReview();
@@ -25,10 +28,11 @@ export default function CreateReviews({ id }: { id: number }) {
 
     const formData = {
       content,
-      post_id: id,
+      post_id: Number(id),
       review_like: 0,
       avatar_url: user?.user_metadata.avatar_url,
       user_id: user?.id,
+      nickname: user?.user_metadata.name,
     };
 
     mutate(formData);

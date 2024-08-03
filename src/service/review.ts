@@ -7,12 +7,7 @@ const supabase = createClient();
 export async function fetchReviews(postId: number) {
   const res = await supabase
     .from('review')
-    .select(
-      `
-    *,
-    post:post_id (*)
-  `,
-    )
+    .select('*')
     .eq('post_id', postId)
     .order('created_at', { ascending: false });
 
@@ -43,9 +38,10 @@ export function useCreateReview() {
       });
     },
 
-    onError: (err) => {
-      alert('리뷰작성을 실패했습니다.');
-      console.log(err);
+    onError: (error) => {
+      if (error) {
+        throw new Error(error.message);
+      }
     },
   });
 }

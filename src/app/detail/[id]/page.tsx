@@ -16,5 +16,7 @@ export default function PostDetail({ params: { id } }: Props) {
 
   if (isLoading) return <div>로딩중...</div>;
 
-  return <Detail postDatail={postDatail?.data && postDatail.data[0]} reviews={reviews} />;
+  return (
+    <Detail postDatail={postDatail?.data && postDatail.data[0]} reviews={reviews?.data || []} />
+  );
 }
