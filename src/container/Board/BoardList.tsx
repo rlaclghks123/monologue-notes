@@ -3,6 +3,7 @@
 import { User } from '@supabase/supabase-js';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useDeletePost } from '@/service/deletePost';
 
 import { GetPosts } from '@/types/post';
@@ -16,6 +17,7 @@ interface Props {
 
 export default function BoardList({ posts, userData }: Props) {
   const { mutate: deleteMutate } = useDeletePost();
+  const router = useRouter();
 
   function handleDeleteBtn(e: React.MouseEvent<HTMLButtonElement>, id?: number) {
     e.preventDefault();
@@ -23,6 +25,8 @@ export default function BoardList({ posts, userData }: Props) {
     const isDelete = confirm('정말 삭제하시겠어요?');
     if (isDelete && id) {
       deleteMutate(id);
+      alert('삭제되었습니다.');
+      router.push('/');
     }
   }
 
