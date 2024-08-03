@@ -19,7 +19,7 @@ export default function CardList({ bestSellerList, curPage }: Props) {
       <div className=" overflow-hidden">
         <div className="flex w-full items-center justify-between ">
           {bestSellerList?.map((data) => (
-            <Link key={data.item_id} href={data.link} className="flex flex-col">
+            <Link key={data.isbn13} href={data.link} className="flex flex-col">
               <Image
                 src={data.cover}
                 width={130}
