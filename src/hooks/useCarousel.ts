@@ -22,7 +22,7 @@ const useCarousel = (limit: number) => {
 
   useEffect(() => {
     if (slideRef.current) {
-      slideRef.current.style.transform = `translateX(-${currentSlide * 1024 + currentSlide * 32}px)`;
+      slideRef.current.style.transform = `translateX(-100vw)`;
     }
   }, [currentSlide]);
 

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ReactNode } from 'react';
 
 import Left from '../../../../public/svgs/angleLeft.svg';
 import Right from '../../../../public/svgs/angleRight.svg';
@@ -9,22 +10,30 @@ import FullSquare from '../../../../public/svgs/fullSquare.svg';
 interface Props {
   size: number;
   curPage: number;
+  children: ReactNode;
 }
 
-export default function Carousel({ size, curPage }: Props) {
-  const totalPages = 5;
-  const prevPage = curPage === 1 ? totalPages : curPage - 1;
-  const nextPage = curPage === totalPages ? 1 : curPage + 1;
+export default function Carousel({ size, curPage, children }: Props) {
+  const prevPage = curPage === 1 ? size : curPage - 1;
+  const nextPage = curPage === size ? 1 : curPage + 1;
   const isCurPage = (idx: number) => curPage === idx + 1;
 
   return (
-    <>
-      <div className="absolute top-20 flex justify-center ">
-        <Link href={`/?page=${prevPage}`} className="absolute left-[-24px] z-20 h-5 w-5">
+    <div className="relative">
+      <div className="flex justify-center px-2">
+        <Link
+          href={`/?page=${prevPage}`}
+          className="absolute left-0 top-1/2 z-20 flex h-5 w-5 -translate-y-1/2 items-center justify-center"
+        >
           <Left alt="leftButton" />
         </Link>
 
-        <Link href={`/?page=${nextPage}`} className="absolute left-[1030px] z-20 h-5 w-5">
+        <div className="flex w-full items-center justify-evenly">{children}</div>
+
+        <Link
+          href={`/?page=${nextPage}`}
+          className="absolute right-0 top-1/2 z-20 flex h-5 w-5 -translate-y-1/2 items-center justify-center"
+        >
           <Right alt="rightButton" />
         </Link>
       </div>
@@ -40,6 +49,6 @@ export default function Carousel({ size, curPage }: Props) {
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 }
