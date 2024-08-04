@@ -10,5 +10,9 @@ export interface ReviewFormData {
 export type Review = ReviewFormData & {
   created_at: Date;
   review_id: string;
-  comment_like: number;
 };
+
+export interface ReviewLike {
+  reviewId: string;
+  like: number;
+}

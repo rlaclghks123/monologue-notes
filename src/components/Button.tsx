@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({ variant = 'primary', text, ...props }: Props) {
   const CLASS_NAME = {
     primary: 'h-full w-full bg-white pl-3 hover:bg-gray-100',
-    secondary: 'hover:bg-gray-300 p-2 rounded-full ml-[-10px] w-9 h-9',
+    secondary: 'mr-2 h-6 w-6',
   };
 
   return (
