@@ -21,7 +21,8 @@ export default function Board({ userData, postData, curPost, setCurPost, limit }
           글쓰기
         </Link>
       )}
-      <BoardList posts={postData?.data ?? []} userData={userData} />
+
+      <BoardList posts={postData?.data ?? []} />
       <Pagenation
         totalCount={postData?.count ?? 0}
         limit={limit}

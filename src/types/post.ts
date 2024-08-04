@@ -20,4 +20,5 @@ export interface PostAndCountData {
     data: GetPosts[] | null;
     count: number;
   };
+  isLoading: boolean;
 }

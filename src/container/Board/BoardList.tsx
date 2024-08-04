@@ -1,79 +1,38 @@
 'use client';
 
-import { User } from '@supabase/supabase-js';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useDeletePost } from '@/service/deletePost';
 
 import { GetPosts } from '@/types/post';
-import NoImg from '../../../public/svgs/noImg.svg';
-import TrashBin from '../../../public/svgs/trashBin.svg';
+import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
   posts: GetPosts[];
-  userData?: User | null;
 }
 
-export default function BoardList({ posts, userData }: Props) {
-  const { mutate: deleteMutate } = useDeletePost();
-  const router = useRouter();
-
-  function handleDeleteBtn(e: React.MouseEvent<HTMLButtonElement>, id?: number) {
-    e.preventDefault();
-    // eslint-disable-next-line no-restricted-globals
-    const isDelete = confirm('정말 삭제하시겠어요?');
-    if (isDelete && id) {
-      deleteMutate(id);
-      alert('삭제되었습니다.');
-      router.push('/');
-    }
-  }
-
+export default function BoardList({ posts }: Props) {
   return (
-    <div className=" h-full bg-white px-10 py-5">
-      <ol className="flex h-full flex-col gap-4 overflow-scroll">
-        {posts.map((post, idx) => (
+    <div className=" h-full rounded-lg bg-white p-2">
+      <ol className="grid-rows-3-equal grid h-full grid-cols-3 gap-2 overflow-scroll ">
+        {posts.map((post) => (
           <li
             key={post.id}
-            className="flex w-full items-center  justify-between border border-black  hover:bg-gray-100 "
+            className="h-full w-full cursor-pointer flex-col truncate rounded-lg border border-black p-2 hover:border hover:border-solid hover:border-gray-300"
           >
-            <Link href={`detail/${post.id}`} className="flex w-[90%] items-center justify-between">
-              <p>{idx + 1}</p>
-              {post.cover ? (
-                <Image
-                  src={post.cover || NoImg}
-                  width={120}
-                  height={50}
-                  alt="커버 이미지"
-                  className="h-10 w-[5%] rounded-xl"
-                />
-              ) : (
-                <NoImg className="h-10 w-[5%] rounded-xl" />
-              )}
-              <p className="w-[30%] truncate">{`제목 : ${post.title}`}</p>
-              <p className="w-[30%] truncate ">{`출판사 : ${post.publisher}`}</p>
+            <Link href={`detail/${post.id}`} className="flex h-full items-center ">
+              <Image
+                src={post.cover || NoImg}
+                width={120}
+                height={50}
+                alt="커버 이미지"
+                className="h-32 min-w-24 max-w-24 rounded-xl"
+              />
+              <div className="ml-2 flex h-full w-full flex-col gap-4 py-5 text-xs">
+                <p>{`제목 : ${post.title}`}</p>
+                <p>{`출판사 : ${post.publisher}`}</p>
+                <p>{`독백자 : ${post.nickname ?? '익명'}`}</p>
+              </div>
             </Link>
-            <p className="flex h-full w-[10%] items-center ">
-              {userData?.id === post?.user_id && (
-                <span className="flex h-full w-full">
-                  <Link
-                    href={`post/${post.id}`}
-                    className="flex h-full w-1/2 items-center justify-center hover:text-peach-fuzz"
-                  >
-                    수정
-                  </Link>
-                  <button
-                    type="button"
-                    onClick={(e) => handleDeleteBtn(e, post.id)}
-                    className="h-full w-[50%] hover:text-peach-fuzz"
-                    aria-labelledby={`delete-label-${post.id}`}
-                  >
-                    <TrashBin className="h-5 w-5 hover:fill-peach-fuzz" />
-                  </button>
-                </span>
-              )}
-            </p>
           </li>
         ))}
       </ol>
