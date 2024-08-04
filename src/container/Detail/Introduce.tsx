@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Profile from '@/components/Profile';
 import TitleDescription from '@/components/TitleDescription';
 import { GetPosts } from '@/types/post';
-import NoImg from '../../../public/svgs/noImg.svg';
+import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
   postDatail: GetPosts;
@@ -14,18 +14,14 @@ export default function Introduce({ postDatail }: Props) {
       <TitleDescription className="w-[75%]">
         <p>책 소개</p>
         <div className=" flex h-full ">
-          {postDatail.cover ? (
-            <Image
-              src={postDatail.cover || NoImg}
-              width={120}
-              height={120}
-              priority
-              alt="커버 이미지"
-              className="mr-4 h-28 w-28 rounded-xl"
-            />
-          ) : (
-            <NoImg className="mr-10 h-28 w-28 fill-gray-300" />
-          )}
+          <Image
+            src={postDatail.cover || NoImg}
+            width={120}
+            height={120}
+            priority
+            alt="커버 이미지"
+            className="mr-4 h-28 w-28 rounded-xl"
+          />
           <div className="h-28 w-[80%] flex-col">
             <div className="my-2 truncate">{`제목 - ${postDatail.title}`}</div>
             <div className="my-2">{`출판사 - ${postDatail.publisher}`}</div>

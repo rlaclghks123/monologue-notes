@@ -14,7 +14,7 @@ import { defaultFormData } from '@/utils/constants';
 
 import BookDetail from './BookDetail';
 import BookDetailTextArea from './BookDetailTextArea';
-import NoImg from '../../../public/svgs/noImg.svg';
+import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
   defaultData?: PostFormDataType;

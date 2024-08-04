@@ -11,7 +11,7 @@ import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
 
 import BookSearchModal from './BookSearchModal';
-import NoImg from '../../../public/svgs/noImg.svg';
+import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
   coverImg: string | StaticImport;
@@ -84,18 +84,14 @@ export default function BookDetailInfo({ coverImg }: Props) {
         </div>
 
         <div className="flex w-full justify-center">
-          {cover ? (
-            <Image
-              src={cover}
-              alt="책 정보"
-              width={150}
-              height={160}
-              priority
-              className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
-            />
-          ) : (
-            <NoImg className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200" />
-          )}
+          <Image
+            src={cover || NoImg}
+            alt="책 정보"
+            width={150}
+            height={160}
+            priority
+            className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
+          />
 
           <div className="flex flex-col justify-evenly gap-2 ">
             <Input
