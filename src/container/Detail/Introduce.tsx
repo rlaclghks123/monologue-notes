@@ -11,7 +11,7 @@ interface Props {
 export default function Introduce({ postDatail }: Props) {
   return (
     <div className="flex h-72 w-full items-center border-b-2 border-solid border-gray-200">
-      <TitleDescription className="xs:w-[60%] sm:w-[75%]">
+      <TitleDescription className="xs:w-[60%] xs:border-r xs:border-solid xs:border-gray-300 xs:px-4 sm:w-[75%] sm:border-0">
         <p>책 소개</p>
         <div className="xs:flex-col flex sm:h-full sm:flex-row">
           <Image
@@ -30,13 +30,17 @@ export default function Introduce({ postDatail }: Props) {
         </div>
       </TitleDescription>
 
-      <TitleDescription className="xs:w-[40%] ml-[5%] sm:w-[25%]">
-        <p>독백자</p>
-        <div className=" flex h-full ">
-          <Profile src={postDatail.avatar_url} />
-          <div className="xs:text-xs truncate sm:text-base">{postDatail.nickname ?? '사용자'}</div>
-        </div>
-      </TitleDescription>
+      <div className="xs:w-[40%] ml-[5%] sm:w-[25%]">
+        <TitleDescription>
+          <p>독백자</p>
+          <div className="flex h-full ">
+            <Profile src={postDatail.avatar_url} />
+            <div className="xs:text-xs truncate sm:text-base">
+              {postDatail.nickname ?? '사용자'}
+            </div>
+          </div>
+        </TitleDescription>
+      </div>
     </div>
   );
 }

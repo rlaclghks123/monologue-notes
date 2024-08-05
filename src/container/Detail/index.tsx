@@ -5,6 +5,7 @@ import BookDescriptions from './BookDescriptions';
 
 import BookReviews from './BookReviews.tsx';
 import Introduce from './Introduce';
+import UpdateOrDeleteButtons from './UpdateOrDeleteButtons';
 
 interface Props {
   postDatail: GetPosts;
@@ -16,6 +17,7 @@ export default function Detail({ postDatail, reviews }: Props) {
     <>
       <Introduce postDatail={postDatail} />
       <BookDescriptions postDatail={postDatail} />
+      <UpdateOrDeleteButtons postDatail={postDatail} />
       <BookReviews reviews={reviews} />
     </>
   );
