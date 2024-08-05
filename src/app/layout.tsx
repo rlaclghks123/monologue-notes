@@ -21,7 +21,7 @@ export default function RootLayout({
       <body>
         <Providers>
           <Navigation />
-          <main className="px-52 pt-16">{children}</main>
+          <main className="xs:px-2 pt-16 sm:px-16 xl:px-44">{children}</main>
         </Providers>
       </body>
     </html>

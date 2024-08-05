@@ -18,7 +18,7 @@ export default function BookDescriptions({ postDatail }: Props) {
         <div key={id}>
           <TitleDescription key={id}>
             <p>{title}</p>
-            <div className="min-h-52 whitespace-pre-wrap bg-white p-2">
+            <div className="xs:text-xs min-h-52 whitespace-pre-wrap bg-white p-2 sm:text-base">
               {postDatail[id as 'before_read' | 'writer_say' | 'after_read']}
             </div>
           </TitleDescription>

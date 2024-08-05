@@ -73,30 +73,31 @@ export default function BookDetailInfo({ coverImg }: Props) {
 
   return (
     <>
-      <section className="flex flex-col items-center pt-14">
-        <div className="my-5 flex h-10 w-96  border border-solid border-gray-200">
+      <section className="xs:pt-4 flex flex-col items-center sm:pt-14">
+        <div className="xs:w-80 my-5 flex border border-solid border-gray-200 sm:h-10 sm:w-96">
           <Button text="🔍 책 찾기" onClick={() => setIsOpen(true)} />
           <Button
             text="초기화"
-            className="w-24 border-l-2 border-gray-100 bg-white hover:bg-gray-100"
+            className="b w-24 border-l-2 border-gray-100 bg-white hover:bg-gray-100"
             onClick={() => setIsReset(true)}
           />
         </div>
 
-        <div className="flex w-full justify-center">
+        <div className="flex w-full items-center justify-center">
           <Image
             src={cover || NoImg}
             alt="책 정보"
             width={150}
             height={160}
             priority
-            className="mr-10 max-h-40 max-w-36 rounded-3xl  border border-solid border-gray-200"
+            className="xs:max-h-24 xs:max-w-20 mr-10 rounded-3xl  border border-solid border-gray-200 sm:max-h-40 sm:max-w-36"
           />
 
-          <div className="flex flex-col justify-evenly gap-2 ">
+          <div className="flex flex-col justify-evenly gap-2">
             <Input
               label="제목"
               id="title"
+              className="xs:w-[90%] xs:ml-2 px-1 placeholder:text-xs sm:w-72"
               placeholder="제목을 입력해주세요"
               {...register('title', { required: '제목은 필수 입력 항목입니다' })}
               errorMessage={errors?.title?.message as string}
@@ -105,6 +106,7 @@ export default function BookDetailInfo({ coverImg }: Props) {
             <Input
               label="출판사"
               id="publisher"
+              className="xs:w-[90%] xs:ml-2 px-1 placeholder:text-xs sm:w-72"
               placeholder="출판사를 입력해주세요"
               {...register('publisher', { required: '출판사는 필수 입력 항목입니다' })}
               errorMessage={errors?.publisher?.message as string}
@@ -113,6 +115,7 @@ export default function BookDetailInfo({ coverImg }: Props) {
             <Input
               label="쪽수"
               type="number"
+              className="xs:w-[90%] xs:ml-2 px-1 placeholder:text-xs sm:w-72"
               id="item_page"
               placeholder="페이지수를 입력해주세요"
               {...register('item_page', {

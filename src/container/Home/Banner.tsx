@@ -17,21 +17,23 @@ const DATA = [
 
 export default function Banner() {
   return (
-    <section className="mt-5 box-border flex h-52 w-full justify-between rounded-lg bg-peach-fuzz">
-      <div className="flex h-full w-1/2 flex-col items-center justify-center">
+    <section className="xs:p-4 xs:flex-col xs:items-center xs:h-56 mt-5 w-full justify-between rounded-lg bg-peach-fuzz sm:flex sm:h-52 sm:flex-row sm:p-2">
+      <div className="xs:p-4 xs:w-full xs:mb-5 xs:h-1/2 flex flex-col items-center justify-center sm:w-1/2 sm:p-2">
         <Image
           src="/images/bookBoy.png"
           width="120"
           height="120"
           alt="책"
           priority
-          style={{ width: 'auto', height: 'auto' }}
+          className="xs:h-20 xs:w-16 mb-2 sm:h-28 sm:w-28"
         />
-        <p className="text-base">독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요</p>
+        <p className="xs:text-[10px] sm:text-xs xl:text-base">
+          독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요
+        </p>
       </div>
 
-      <div className=" flex h-full w-1/2 items-center justify-center text-base">
-        <div className="flex h-full flex-col justify-evenly">
+      <div className="xs:text-[10px] xs:w-full flex items-center justify-center sm:w-1/2 sm:text-xs xl:text-base ">
+        <div className="flex flex-col justify-evenly gap-2">
           {DATA.map(({ id, content }) => (
             <p key={id}>{content}</p>
           ))}

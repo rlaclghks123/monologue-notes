@@ -4,6 +4,9 @@ const config: Config = {
   content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
   theme: {
     extend: {
+      screens: {
+        xs: '360px',
+      },
       gridTemplateRows: {
         '3-equal': 'repeat(3, minmax(0, 1fr))',
       },

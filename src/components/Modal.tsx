@@ -21,7 +21,7 @@ export default function Modal({ open, children }: Props) {
   return createPortal(
     <>
       <div className="fixed left-0 top-0 z-10 h-screen w-screen bg-black opacity-90" />
-      <div className="absolute left-1/3 top-[15%] z-20 h-[70%] w-1/3 rounded-lg bg-white p-5">
+      <div className="xs:w-[80%] xs:left-[10%] absolute top-[15%] z-20 h-[70%] rounded-lg bg-white p-5 sm:left-[15%] sm:w-[70%] xl:left-1/3 xl:w-1/3">
         <div className="h-full w-full">{children}</div>
       </div>
     </>,

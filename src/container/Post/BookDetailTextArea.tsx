@@ -29,7 +29,7 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
           required: '내용은 필수 입력 항목입니다',
         })}
         maxLength={max}
-        className="mt-3 h-52 resize-none rounded-lg p-2"
+        className="xs:text-xs mt-3 h-52 resize-none rounded-lg p-2 sm:text-base"
       />
     </div>
   );

@@ -20,7 +20,7 @@ export type SelectedBook = Pick<
 >;
 
 export interface BestSeller {
-  item_id: number;
+  itemId: number;
   link: string;
   cover: string | StaticImport;
   title: string;
