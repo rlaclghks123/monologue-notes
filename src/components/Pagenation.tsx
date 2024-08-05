@@ -21,7 +21,7 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
           text="<"
           onClick={handlePrev}
           disabled={curPage === 1}
-          className="w-6 rounded-md hover:bg-gray-200"
+          className="w-6 rounded-md hover:bg-gray-200 hover:text-white"
         />
 
         {pagenationArr[curPageGroup]?.map((number, idx) => (
@@ -29,7 +29,7 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
             key={number}
             text={String(number)}
             onClick={() => handleClickPage(number)}
-            className={`w-6 rounded-md hover:bg-gray-200 ${isCurPage(idx) && 'bg-gray-200'} `}
+            className={`w-6 rounded-md hover:bg-gray-200 hover:text-white ${isCurPage(idx) && 'bg-gray-200 text-white'} `}
           />
         ))}
 
@@ -37,7 +37,7 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
           text=">"
           onClick={handleNext}
           disabled={curPage === numberOfPages - 1}
-          className="w-6 rounded-md hover:bg-gray-200"
+          className="w-6 rounded-md hover:bg-gray-200 hover:text-white"
         />
       </div>
     </div>
