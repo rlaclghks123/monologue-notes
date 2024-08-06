@@ -1,19 +1,24 @@
-import { User } from '@supabase/supabase-js';
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 import { PostAndCountData } from '@/types/post';
 import BoardList from './BoardList';
 import Pagenation from '../../components/Pagenation';
+import { useUser } from '@/service/user';
+import usePosts from '@/service/getPosts';
 
-interface Props {
-  userData?: User | null;
-  postData: PostAndCountData['data'];
-  curPost: number;
-  setCurPost: React.Dispatch<React.SetStateAction<number>>;
-  limit: number;
-}
+export default function Board() {
+  const { data: userData } = useUser();
+  const [curPost, setCurPost] = useState(1);
+  const limit = 8;
 
-export default function Board({ userData, postData, curPost, setCurPost, limit }: Props) {
+  const { data: postData }: PostAndCountData = usePosts({
+    from: (curPost - 1) * (limit + 1),
+    to: (curPost - 1) * (limit + 1) + limit,
+  });
+
   return (
     <div className="h-screen-without-nav pb-20 pt-5">
       <div className="mb-2 flex justify-end">

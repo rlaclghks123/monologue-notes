@@ -1,24 +1,21 @@
-import { GetPosts } from '@/types/post';
-
-import { Review } from '@/types/review';
 import BookDescriptions from './BookDescriptions';
 
 import BookReviews from './BookReviews.tsx';
 import Introduce from './Introduce';
 import UpdateOrDeleteButtons from './UpdateOrDeleteButtons';
+import usePostDetail from '@/service/getPostDetail';
 
-interface Props {
-  postDatail: GetPosts;
-  reviews?: Review[];
-}
+export default function Detail({ id }: { id: string }) {
+  const { data: postDetail, isLoading } = usePostDetail(id);
 
-export default function Detail({ postDatail, reviews }: Props) {
+  if (isLoading) return <div>로딩중...</div>;
+
   return (
     <>
-      <Introduce postDatail={postDatail} />
-      <BookDescriptions postDatail={postDatail} />
-      <UpdateOrDeleteButtons postDatail={postDatail} />
-      <BookReviews reviews={reviews} />
+      <Introduce postDetail={postDetail?.data && postDetail.data[0]} />
+      <BookDescriptions postDetail={postDetail?.data && postDetail.data[0]} />
+      <UpdateOrDeleteButtons postDetail={postDetail?.data && postDetail.data[0]} />
+      <BookReviews />
     </>
   );
 }

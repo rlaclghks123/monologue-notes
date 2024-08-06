@@ -1,12 +1,14 @@
+import { headers } from 'next/headers';
+
 import { BestSeller } from '@/types/book';
 import CardList from './CardList';
+import getBestSeller from '@/service/getBestSeller';
 
-interface Props {
-  bestSellerList: BestSeller[];
-  curPage: number;
-}
+export default async function BestSellerBanner() {
+  const headersList = headers();
+  const curPage = Number(headersList.get('pathname')?.split('page=')[1]) || 1;
+  const { item: bestSellerList }: { item: BestSeller[] } = await getBestSeller(curPage);
 
-export default async function BestSellerBanner({ bestSellerList, curPage }: Props) {
   return (
     <div className="w-ful mt-20">
       <p className="mb-4 text-lg font-bold">베스트 셀러</p>

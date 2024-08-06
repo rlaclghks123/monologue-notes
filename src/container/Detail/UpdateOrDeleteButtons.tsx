@@ -6,9 +6,10 @@ import { useUser } from '@/service/user';
 import { GetPosts } from '@/types/post';
 
 interface Props {
-  postDatail: GetPosts;
+  postDetail: GetPosts;
 }
-export default function UpdateOrDeleteButtons({ postDatail }: Props) {
+
+export default function UpdateOrDeleteButtons({ postDetail }: Props) {
   const { mutate: deleteMutate } = useDeletePost();
   const router = useRouter();
   const { data: userData } = useUser();
@@ -26,20 +27,20 @@ export default function UpdateOrDeleteButtons({ postDatail }: Props) {
 
   return (
     <>
-      {userData?.id === postDatail.user_id && (
+      {userData?.id === postDetail.user_id && (
         <div className="my-10 mb-32 flex justify-center gap-4 bg-white py-5">
           <span className="flex h-full w-full">
             <Link
-              href={`/post/${postDatail.id}`}
+              href={`/post/${postDetail.id}`}
               className="xs:text-xs flex h-full w-1/2 items-center justify-center hover:text-peach-fuzz sm:text-base"
             >
               수정
             </Link>
             <button
               type="button"
-              onClick={(e) => handleDeleteBtn(e, postDatail.id)}
+              onClick={(e) => handleDeleteBtn(e, postDetail.id)}
               className="xs:text-xs h-full w-[50%] hover:text-peach-fuzz sm:text-base"
-              aria-labelledby={`delete-label-${postDatail.id}`}
+              aria-labelledby={`delete-label-${postDetail.id}`}
             >
               삭제
             </button>

@@ -1,18 +1,17 @@
 import { useState } from 'react';
+import { useParams } from 'next/navigation';
+
 import Button from '@/components/Button';
 import Profile from '@/components/Profile';
-import { useLikeReview } from '@/service/review';
-import { Review } from '@/types/review';
+import { useLikeReview, useReviews } from '@/service/review';
 import { changeDate } from '@/utils/changeDate';
 
 import EmptyHeart from '../../../../public/svgs/emptyHeart.svg';
 import FulledHeart from '../../../../public/svgs/fulledHeart.svg';
 
-interface Props {
-  reviews?: Review[];
-}
-
-export default function ReviewList({ reviews }: Props) {
+export default function ReviewList() {
+  const { id } = useParams();
+  const { data: reviews } = useReviews(Number(id));
   const [clickedLikeId, setClickedLikeId] = useState<{ [key: string]: boolean }>({});
   const { mutate: likeMutate } = useLikeReview();
 
@@ -33,7 +32,7 @@ export default function ReviewList({ reviews }: Props) {
 
   return (
     <ul>
-      {reviews?.map((review) => (
+      {reviews?.data?.map((review) => (
         <li key={review.review_id} className="my-10 flex" data-post-id={review.post_id}>
           <Profile src={review.avatar_url ?? ''} />
 
