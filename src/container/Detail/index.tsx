@@ -1,9 +1,9 @@
+import usePostDetail from '@/service/getPostDetail';
 import BookDescriptions from './BookDescriptions';
 
 import BookReviews from './BookReviews.tsx';
 import Introduce from './Introduce';
 import UpdateOrDeleteButtons from './UpdateOrDeleteButtons';
-import usePostDetail from '@/service/getPostDetail';
 
 export default function Detail({ id }: { id: string }) {
   const { data: postDetail, isLoading } = usePostDetail(id);

@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { ReactNode } from 'react';
+import Link from 'next/link';
 
 import Left from '../../../../public/svgs/angleLeft.svg';
 import Right from '../../../../public/svgs/angleRight.svg';
@@ -23,7 +23,7 @@ export default function Carousel({ size, curPage, children }: Props) {
       <div className="flex justify-center px-2">
         <Link
           href={`/?page=${prevPage}`}
-          className="xs:h-3 xs:w-3 absolute left-0 top-1/3 z-20 flex -translate-y-1/2 items-center justify-center sm:h-5 sm:w-5"
+          className="absolute left-0 top-1/3 z-20 flex -translate-y-1/2 items-center justify-center xs:h-3 xs:w-3 sm:h-5 sm:w-5"
         >
           <Left alt="leftButton" />
         </Link>
@@ -32,7 +32,7 @@ export default function Carousel({ size, curPage, children }: Props) {
 
         <Link
           href={`/?page=${nextPage}`}
-          className="xs:h-3 xs:w-3 absolute right-0 top-1/3 z-20 flex -translate-y-1/2 items-center justify-center  sm:h-5 sm:w-5"
+          className="absolute right-0 top-1/3 z-20 flex -translate-y-1/2 items-center justify-center xs:h-3 xs:w-3  sm:h-5 sm:w-5"
         >
           <Right alt="rightButton" />
         </Link>

@@ -11,7 +11,7 @@ interface Props {
 export default function BoardList({ posts }: Props) {
   return (
     <div className=" h-full overflow-scroll rounded-lg bg-white">
-      <ol className="xl:grid-rows-3-equal xs:grid-cols-1 xs:gap-4 grid gap-2 sm:grid-cols-2 xl:grid-cols-3">
+      <ol className="grid gap-2 xs:grid-cols-1 xs:gap-4 sm:grid-cols-2 xl:grid-cols-3 xl:grid-rows-3-equal">
         {posts.map((post) => (
           <li
             key={post.id}
@@ -24,7 +24,7 @@ export default function BoardList({ posts }: Props) {
                 height={50}
                 alt="커버 이미지"
                 priority
-                className="xs:min-w-16 xs:max-w-16 h-full rounded-xl sm:min-w-20 sm:max-w-20 xl:min-w-24 xl:max-w-24"
+                className="h-full rounded-xl xs:min-w-16 xs:max-w-16 sm:min-w-20 sm:max-w-20 xl:min-w-24 xl:max-w-24"
               />
               <div className="ml-2 flex h-full w-full flex-col justify-evenly truncate text-xs">
                 <p>{`제목 : ${post.title}`}</p>

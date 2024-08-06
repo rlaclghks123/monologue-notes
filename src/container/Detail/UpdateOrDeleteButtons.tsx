@@ -26,20 +26,20 @@ export default function UpdateOrDeleteButtons({ postDetail }: Props) {
   }
 
   return (
-    <>
+    <div>
       {userData?.id === postDetail.user_id && (
         <div className="my-10 mb-32 flex justify-center gap-4 bg-white py-5">
           <span className="flex h-full w-full">
             <Link
               href={`/post/${postDetail.id}`}
-              className="xs:text-xs flex h-full w-1/2 items-center justify-center hover:text-peach-fuzz sm:text-base"
+              className="flex h-full w-1/2 items-center justify-center hover:text-peach-fuzz xs:text-xs sm:text-base"
             >
               수정
             </Link>
             <button
               type="button"
               onClick={(e) => handleDeleteBtn(e, postDetail.id)}
-              className="xs:text-xs h-full w-[50%] hover:text-peach-fuzz sm:text-base"
+              className="h-full w-[50%] hover:text-peach-fuzz xs:text-xs sm:text-base"
               aria-labelledby={`delete-label-${postDetail.id}`}
             >
               삭제
@@ -47,6 +47,6 @@ export default function UpdateOrDeleteButtons({ postDetail }: Props) {
           </span>
         </div>
       )}
-    </>
+    </div>
   );
 }

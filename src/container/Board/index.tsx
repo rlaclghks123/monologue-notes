@@ -1,13 +1,13 @@
 'use client';
 
-import Link from 'next/link';
 import { useState } from 'react';
+import Link from 'next/link';
 
+import usePosts from '@/service/getPosts';
+import { useUser } from '@/service/user';
 import { PostAndCountData } from '@/types/post';
 import BoardList from './BoardList';
 import Pagenation from '../../components/Pagenation';
-import { useUser } from '@/service/user';
-import usePosts from '@/service/getPosts';
 
 export default function Board() {
   const { data: userData } = useUser();
