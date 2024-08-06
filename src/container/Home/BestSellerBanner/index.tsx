@@ -8,8 +8,8 @@ interface Props {
 
 export default async function BestSellerBanner({ bestSellerList, curPage }: Props) {
   return (
-    <div className="w-ful mt-11">
-      <p className="mb-2">베스트 셀러</p>
+    <div className="w-ful mt-20">
+      <p className="mb-4 text-lg font-bold">베스트 셀러</p>
       <CardList bestSellerList={bestSellerList} curPage={curPage} />
     </div>
   );
