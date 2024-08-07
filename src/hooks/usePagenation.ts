@@ -9,7 +9,7 @@ interface Props {
 
 function sliceArrayByLimit(totalCount: number | undefined, limit: number) {
   if (!totalCount) return [[1]];
-  const size = Math.ceil(totalCount / limit);
+  const size = Math.ceil(totalCount / (limit + 1));
   const totalPageArray = Array.from({ length: size }, (_, i) => i + 1);
   return Array.from({ length: size }, () => totalPageArray.splice(0, limit));
 }

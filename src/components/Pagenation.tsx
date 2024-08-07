@@ -14,6 +14,8 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
 
   const isCurPage = (idx: number) => ((curPage - 1) % limit) + 1 === idx + 1;
 
+  if (!totalCount) return null;
+
   return (
     <div className="mt-2 w-full">
       <div className="flex items-center justify-center gap-2">
