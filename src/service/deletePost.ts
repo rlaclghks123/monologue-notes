@@ -22,6 +22,10 @@ export function useDeletePost() {
       queryClient.invalidateQueries({
         queryKey: ['usePosts'],
       }),
-    onError: () => alert('삭제를 실패했습니다.'),
+    onError: (error) => {
+      if (error) {
+        throw new Error(error.message);
+      }
+    },
   });
 }
