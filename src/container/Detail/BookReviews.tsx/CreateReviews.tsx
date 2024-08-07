@@ -4,6 +4,9 @@ import { useState } from 'react';
 import { useParams } from 'next/navigation';
 
 import Profile from '@/components/Profile';
+import ToastUI from '@/components/ToastUI';
+
+import useAlertTimer from '@/hooks/useAlertTimer';
 import { useCreateReview } from '@/service/review';
 import { useUser } from '@/service/user';
 
@@ -11,8 +14,11 @@ export default function CreateReviews() {
   const { data: user } = useUser();
   const { id } = useParams();
   const [isFocus, setIsFocus] = useState(false);
+  const [isEmpty, setIsEmpty] = useState(false);
   const [content, setContent] = useState('');
   const { mutate } = useCreateReview();
+
+  useAlertTimer(isEmpty, () => setIsEmpty);
 
   async function handleSubmitReview(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
@@ -20,7 +26,7 @@ export default function CreateReviews() {
     if (!content.trim()) {
       setIsFocus(false);
       setContent('');
-      alert('댓글을 작성해주세요.');
+      setIsEmpty(true);
       return;
     }
 
@@ -66,6 +72,7 @@ export default function CreateReviews() {
           </form>
         </div>
       </div>
+      {isEmpty && <ToastUI message="댓글을 작성해주세요." />}
     </div>
   );
 }

@@ -1,8 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
+import { useDispatch } from 'react-redux';
 import { useDeletePost } from '@/service/deletePost';
 import { useUser } from '@/service/user';
+import { deletePostState } from '@/store/slices/alertSlice';
 import { GetPosts } from '@/types/post';
 
 interface Props {
@@ -13,6 +15,7 @@ export default function UpdateOrDeleteButtons({ postDetail }: Props) {
   const { mutate: deleteMutate } = useDeletePost();
   const router = useRouter();
   const { data: userData } = useUser();
+  const dispatch = useDispatch();
 
   function handleDeleteBtn(e: React.MouseEvent<HTMLButtonElement>, id?: number) {
     e.preventDefault();
@@ -20,8 +23,8 @@ export default function UpdateOrDeleteButtons({ postDetail }: Props) {
     const isDelete = confirm('정말 삭제하시겠어요?');
     if (isDelete && id) {
       deleteMutate(id);
-      alert('삭제되었습니다.');
-      router.push('/');
+      dispatch(deletePostState(true));
+      router.push('/board');
     }
   }
 

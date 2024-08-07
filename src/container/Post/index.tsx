@@ -4,11 +4,13 @@ import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
 
+import { useDispatch } from 'react-redux';
 import Button from '@/components/Button';
 import createPost from '@/service/createPost';
 import { useUpdatePost } from '@/service/updatePost';
 
 import { useUser } from '@/service/user';
+import { createPostState, updatePostState } from '@/store/slices/alertSlice';
 import { PostFormDataType } from '@/types/post';
 import { defaultFormData } from '@/utils/constants';
 
@@ -32,6 +34,7 @@ export default function Post({ defaultData = defaultFormData, type }: Props) {
 
   const router = useRouter();
   const { data: userData } = useUser();
+  const dispatch = useDispatch();
 
   const onSubmit = useCallback(async (data: PostFormDataType) => {
     const coverSrc = typeof data.cover === 'string' && data.cover;
@@ -45,12 +48,12 @@ export default function Post({ defaultData = defaultFormData, type }: Props) {
 
     if (type === 'CREATE') {
       await createPost(postResult);
-      alert('성공적으로 글이 추가되었습니다.');
+      dispatch(createPostState(true));
     }
 
     if (type === 'UPDATE') {
       updateMutate(postResult);
-      alert('성공적으로 글이 수정되었습니다.');
+      dispatch(updatePostState(true));
     }
 
     router.push('/board');
