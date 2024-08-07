@@ -11,9 +11,9 @@ export default async function Navigation() {
   const loginText = isUser ? '로그아웃' : '로그인';
 
   return (
-    <header className="xs:w-full xs:px-2 fixed flex h-16 items-center justify-between bg-white sm:px-16 xl:px-44">
+    <header className="fixed z-[90] flex h-16 items-center justify-between bg-white xs:w-full xs:px-2 sm:px-16 xl:px-44">
       <div className="flex h-16 w-2/6 items-center justify-between whitespace-nowrap ">
-        <Link href="/" className=" xs:text-base font-bold sm:text-2xl">
+        <Link href="/" className=" font-bold xs:text-base sm:text-2xl">
           독백노트 📚
         </Link>
         <nav>
@@ -21,7 +21,7 @@ export default async function Navigation() {
             {CATEGORY.map((category) => (
               <li
                 key={category.id}
-                className="xs:text-xs mx-3 cursor-pointer hover:text-gray-300 sm:text-base"
+                className="mx-3 cursor-pointer hover:text-gray-300 xs:text-xs sm:text-base"
               >
                 <Link href={category.link}>{category.name}</Link>
               </li>
@@ -31,7 +31,7 @@ export default async function Navigation() {
       </div>
       <Link
         href="/auth"
-        className="xs:text-xs flex w-2/6 justify-end hover:text-gray-300 sm:text-base"
+        className="flex w-2/6 justify-end hover:text-gray-300 xs:text-xs sm:text-base"
       >
         {loginText}
       </Link>
