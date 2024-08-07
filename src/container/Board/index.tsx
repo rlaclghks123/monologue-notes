@@ -35,7 +35,7 @@ export default function Board() {
 
   return (
     <div className="h-screen-without-nav pb-20 pt-5">
-      <div className="mb-2 flex justify-end">
+      <div className="mb-2 flex h-8 justify-end">
         {userData && (
           <Link
             href="/post"
