@@ -18,7 +18,7 @@ export default function BookDescriptions({ postDetail }: Props) {
         <div key={id}>
           <TitleDescription key={id}>
             <p>{title}</p>
-            <div className="xs:text-xs min-h-52 whitespace-pre-wrap bg-white p-2 sm:text-base">
+            <div className="h-auto min-h-52 whitespace-pre-wrap bg-white p-2 xs:text-xs sm:text-base">
               {postDetail[id as 'before_read' | 'writer_say' | 'after_read']}
             </div>
           </TitleDescription>

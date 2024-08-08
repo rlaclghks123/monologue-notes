@@ -8,7 +8,7 @@ export default function TitleDescription({ children, className }: Props) {
   return (
     <div className={`my-20 h-52 ${className}`}>
       <div className="mb-3 text-xl font-semibold">{title}</div>
-      <div className="h-52 overflow-scroll py-2">{description}</div>
+      <div className="h-52 overflow-scroll">{description}</div>
     </div>
   );
 }
