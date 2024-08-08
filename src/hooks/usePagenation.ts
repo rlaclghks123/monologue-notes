@@ -11,6 +11,7 @@ function sliceArrayByLimit(totalCount: number | undefined, limit: number) {
   if (!totalCount) return [[1]];
   const size = Math.ceil(totalCount / (limit + 1));
   const totalPageArray = Array.from({ length: size }, (_, i) => i + 1);
+
   return Array.from({ length: size }, () => totalPageArray.splice(0, limit));
 }
 
@@ -29,7 +30,7 @@ function usePagenation({ totalCount, limit, curPage, setCurPage }: Props) {
   };
 
   const handleNext = () => {
-    if (!totalCount || curPage * limit > totalCount) return;
+    if (!totalCount || curPage * (limit + 1) >= totalCount) return;
     setCurPage((prev) => prev + 1);
     setCurPageGroup(Math.floor(curPage / limit));
   };
