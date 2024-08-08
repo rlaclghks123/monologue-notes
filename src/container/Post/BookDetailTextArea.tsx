@@ -1,4 +1,4 @@
-import { useFormContext } from 'react-hook-form';
+import { useFormContext, useWatch } from 'react-hook-form';
 
 interface Props {
   title: string;
@@ -9,9 +9,14 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
   const max = 1000;
   const {
     register,
-    watch,
+    control,
     formState: { errors },
   } = useFormContext();
+
+  const inputValue = useWatch({
+    control,
+    name: labelId,
+  });
 
   return (
     <div className="my-10 flex flex-col">
@@ -20,7 +25,7 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
           <label htmlFor={labelId}>{title}</label>
           <span className="ml-4 text-xs text-peach-fuzz">{errors[labelId]?.message as string}</span>
         </div>
-        <p>{`${watch(labelId).length}/${max} 자`}</p>
+        <p>{`${inputValue.length}/${max} 자`}</p>
       </header>
 
       <textarea
@@ -29,7 +34,7 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
           required: '내용은 필수 입력 항목입니다',
         })}
         maxLength={max}
-        className="xs:text-xs mt-3 h-52 resize-none rounded-lg p-2 sm:text-base"
+        className="mt-3 h-52 resize-none rounded-lg p-2 xs:text-xs sm:text-base"
       />
     </div>
   );

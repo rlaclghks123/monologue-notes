@@ -33,13 +33,13 @@ export default function BookSearch({ query, setQuery, setCurPage }: Props) {
       <Button
         text="검색"
         onClick={handleSearchClick}
-        className="xs:text-xs w-16 rounded-md border border-black p-1 px-2 hover:bg-gray-200 sm:text-base"
+        className="w-16 rounded-md border border-black p-1 px-2 hover:bg-gray-200 xs:text-xs sm:text-base"
       />
 
       <Button
         text="초기화"
         onClick={handleResetClick}
-        className="xs:text-xs w-16 rounded-md border border-black p-1 px-2 hover:bg-gray-200 sm:text-base"
+        className="w-16 rounded-md border border-black p-1 px-2 hover:bg-gray-200 xs:text-xs sm:text-base"
       />
     </div>
   );
