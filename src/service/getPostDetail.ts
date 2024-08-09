@@ -13,6 +13,7 @@ export default function usePostDetail(id: string) {
   const { data, isLoading, refetch, error } = useQuery({
     queryKey: ['postDetail', id],
     queryFn: () => fetchPostDetail(id),
+    select: (postDetail) => (postDetail && postDetail.data ? postDetail.data[0] : []),
   });
 
   if (error) {

@@ -13,9 +13,9 @@ export default function Detail({ id }: { id: string }) {
 
   return (
     <>
-      <Introduce postDetail={postDetail?.data && postDetail.data[0]} />
-      <BookDescriptions postDetail={postDetail?.data && postDetail.data[0]} />
-      <UpdateOrDeleteButtons postDetail={postDetail?.data && postDetail.data[0]} />
+      <Introduce postDetail={postDetail} />
+      <BookDescriptions postDetail={postDetail} />
+      <UpdateOrDeleteButtons postDetail={postDetail} />
       <BookReviews />
     </>
   );
