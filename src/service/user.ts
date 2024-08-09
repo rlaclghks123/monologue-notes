@@ -18,7 +18,7 @@ export async function kakaoLogin() {
   await supabase.auth.signInWithOAuth({
     provider: 'kakao',
     options: {
-      redirectTo: 'http://localhost:3000/auth/callback',
+      redirectTo: `${process.env.NEXT_PUBLIC_BASE_URL}/auth/callback`,
     },
   });
 }
@@ -29,8 +29,8 @@ export async function signOut() {
 }
 
 export async function loginHandler() {
-  const authInfo = await supabase.auth.getSession();
+  const authInfo = await supabase.auth.getUser();
 
-  if (authInfo.data.session === null) kakaoLogin();
+  if (authInfo.data.user === null) kakaoLogin();
   else signOut();
 }
