@@ -4,7 +4,7 @@ import creatServer from '@/utils/supabase/server';
 const supabase = createClient();
 
 export async function getUser() {
-  const serverSupabase = await creatServer();
+  const serverSupabase = await creatServer(true);
   const user = await serverSupabase.auth.getUser();
   return user;
 }
