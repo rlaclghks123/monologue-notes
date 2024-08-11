@@ -1,8 +1,8 @@
 import TitleDescription from '@/components/TitleDescription';
-import { GetPosts } from '@/types/post';
+import { ReadPost } from '@/types/post';
 
 interface Props {
-  postDetail: GetPosts;
+  postDetail: ReadPost;
 }
 
 const DB = [

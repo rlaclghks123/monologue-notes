@@ -1,12 +1,15 @@
-'use client';
-
+import { User } from '@supabase/supabase-js';
 import CreateReviews from './CreateReviews';
 import ReviewList from './ReviewList';
 
-export default function BookReviews() {
+interface Props {
+  user: User | null;
+}
+
+export default function BookReviews({ user }: Props) {
   return (
     <div className="mb-10 w-full ">
-      <CreateReviews />
+      <CreateReviews user={user} />
       <ReviewList />
     </div>
   );

@@ -1,22 +1,25 @@
-import Loading from '@/components/Loading';
-import usePostDetail from '@/service/getPostDetail';
+import { User } from '@supabase/supabase-js';
+import { ReadPost } from '@/types/post';
 import BookDescriptions from './BookDescriptions';
 
 import BookReviews from './BookReviews.tsx';
 import Introduce from './Introduce';
 import UpdateOrDeleteButtons from './UpdateOrDeleteButtons';
 
-export default function Detail({ id }: { id: string }) {
-  const { data: postDetail, isLoading } = usePostDetail(id);
+interface Props {
+  postDetail: ReadPost[];
+  user: User | null;
+}
 
-  if (isLoading) return <Loading />;
-
+export default function Detail({ postDetail, user }: Props) {
   return (
     <>
-      <Introduce postDetail={postDetail} />
-      <BookDescriptions postDetail={postDetail} />
-      <UpdateOrDeleteButtons postDetail={postDetail} />
-      <BookReviews />
+      <Introduce postDetail={postDetail[0]} />
+      <BookDescriptions postDetail={postDetail[0]} />
+      {user && postDetail[0] && user.id === postDetail[0].user_id && (
+        <UpdateOrDeleteButtons postDetail={postDetail[0]} />
+      )}
+      <BookReviews user={user} />
     </>
   );
 }

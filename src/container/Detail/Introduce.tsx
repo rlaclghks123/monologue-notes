@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 import Profile from '@/components/Profile';
 import TitleDescription from '@/components/TitleDescription';
-import { GetPosts } from '@/types/post';
+import { ReadPost } from '@/types/post';
 import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
-  postDetail: GetPosts;
+  postDetail: ReadPost;
 }
 
 export default function Introduce({ postDetail }: Props) {
@@ -16,7 +16,7 @@ export default function Introduce({ postDetail }: Props) {
         <p>책 소개</p>
         <div className="flex xs:flex-col sm:h-full sm:flex-row">
           <Image
-            src={postDetail.cover || NoImg}
+            src={postDetail?.cover || NoImg}
             width={120}
             height={120}
             priority
@@ -35,9 +35,9 @@ export default function Introduce({ postDetail }: Props) {
         <TitleDescription>
           <p>독백자</p>
           <div className="flex h-full ">
-            <Profile src={postDetail.avatar_url} />
+            <Profile src={postDetail?.avatar_url ?? ''} />
             <div className="truncate xs:text-xs sm:text-base">
-              {postDetail.nickname ?? '사용자'}
+              {postDetail?.nickname ?? '사용자'}
             </div>
           </div>
         </TitleDescription>
