@@ -21,9 +21,9 @@ export default function CreateReviews({ user }: Props) {
   const [content, setContent] = useState('');
   const { mutate } = useCreateReview();
 
-  useAlertTimer(isEmpty, () => setIsEmpty);
+  useAlertTimer(isEmpty, () => setIsEmpty(false));
 
-  async function handleSubmitReview(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
+  function handleSubmitReview(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) {
     e.preventDefault();
 
     if (!content.trim()) {
