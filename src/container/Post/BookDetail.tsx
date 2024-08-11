@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
 import Image from 'next/image';
 import { useFormContext } from 'react-hook-form';
 
@@ -8,13 +7,13 @@ import Input from '@/components/Input';
 
 import { useBookDetail } from '@/service/aladinBooks';
 import { SelectedBook } from '@/types/book';
-import { PostFormDataType } from '@/types/post';
+import { ReadPost } from '@/types/post';
 
 import BookSearchModal from './BookSearchModal';
 import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
-  coverImg: string | StaticImport;
+  coverImg: string;
 }
 
 export default function BookDetailInfo({ coverImg }: Props) {
@@ -41,7 +40,7 @@ export default function BookDetailInfo({ coverImg }: Props) {
 
     Object.keys(fields).forEach((field) => {
       setValue(
-        field as keyof Omit<PostFormDataType, 'id' | 'user_id'>,
+        field as keyof Omit<ReadPost, 'id' | 'user_id'>,
         fields[field as keyof typeof fields],
       );
     });
@@ -55,7 +54,7 @@ export default function BookDetailInfo({ coverImg }: Props) {
   const MIN_PAGE = 1;
 
   useEffect(() => {
-    if (bookDetail) setCover(bookDetail.cover);
+    if (bookDetail) setCover(bookDetail.cover ?? '');
     if (isReset) {
       reset((prev) => ({
         ...prev,

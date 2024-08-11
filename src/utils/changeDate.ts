@@ -1,4 +1,4 @@
-export function changeDate(value: Date) {
+export function changeDate(value: string) {
   const today = new Date();
   const timeValue = new Date(value);
 

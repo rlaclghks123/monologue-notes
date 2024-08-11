@@ -1,10 +1,8 @@
-'use client';
-
-import Loading from '@/components/Loading';
+import { getPostDetail } from '@/app/actions/post';
 import ToastUI from '@/components/ToastUI';
 import Post from '@/container/Post';
-import useCheckLogin from '@/hooks/useCheckLogin';
-import usePostDetail from '@/service/getPostDetail';
+
+import { getUser } from '@/service/user';
 
 interface Props {
   params: {
@@ -12,19 +10,10 @@ interface Props {
   };
 }
 
-export default function PostUpdate({ params: { id } }: Props) {
-  const { data: postDetail, isLoading: postDetailLoading } = usePostDetail(id);
+export default async function PostUpdate({ params: { id } }: Props) {
+  const { data: postDetail } = await getPostDetail(id);
+  const { data } = await getUser();
 
-  const {
-    isLoading: userLoading,
-    isNotLoggedIn,
-    isUserMismatch,
-  } = useCheckLogin(postDetail?.user_id);
-
-  if (postDetailLoading || userLoading) return <Loading />;
-
-  if (isNotLoggedIn) return <ToastUI message="로그인 후 이용해 주세요." />;
-  if (isUserMismatch) return <ToastUI message="작성자만 수정 가능합니다." />;
-
-  return <Post defaultData={postDetail} type="UPDATE" />;
+  if (!data.user) return <ToastUI message="로그인 후 이용해 주세요." />;
+  return <Post defaultData={postDetail?.[0]} type="UPDATE" user={data.user} />;
 }

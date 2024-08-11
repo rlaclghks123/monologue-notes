@@ -1,15 +1,17 @@
+'use client';
+
 import { useCallback } from 'react';
+import { User } from '@supabase/supabase-js';
 import { useRouter } from 'next/navigation';
 import { useForm, FormProvider } from 'react-hook-form';
 
 import { useDispatch } from 'react-redux';
-import Button from '@/components/Button';
-import createPost from '@/service/createPost';
-import { useUpdatePost } from '@/service/updatePost';
 
-import { useUser } from '@/service/user';
+import { createPost, updatePost } from '@/app/actions/post';
+import Button from '@/components/Button';
+
 import { createPostState, updatePostState } from '@/store/slices/alertSlice';
-import { PostFormDataType } from '@/types/post';
+import { CreatePost } from '@/types/post';
 import { defaultFormData } from '@/utils/constants';
 
 import BookDetail from './BookDetail';
@@ -17,31 +19,31 @@ import BookDetailTextArea from './BookDetailTextArea';
 import NoImg from '../../../public/images/defaultBook.png';
 
 interface Props {
-  defaultData?: PostFormDataType;
+  defaultData?: CreatePost;
   type: 'CREATE' | 'UPDATE';
+  user: User;
 }
 
-export default function Post({ defaultData = defaultFormData, type }: Props) {
+export default function Post({ defaultData = defaultFormData, type, user }: Props) {
   const methods = useForm({
     defaultValues: defaultData,
   });
 
   const { handleSubmit } = methods;
 
-  const { mutate: updateMutate } = useUpdatePost();
-
   const router = useRouter();
-  const { data: userData } = useUser();
   const dispatch = useDispatch();
 
-  const onSubmit = useCallback(async (data: PostFormDataType) => {
+  const onSubmit = useCallback(async (data: CreatePost) => {
     const coverSrc = typeof data.cover === 'string' && data.cover;
     const cover = coverSrc === NoImg.src ? '' : data.cover;
+
     const postResult = {
       ...data,
       cover,
-      nickname: userData?.user_metadata.name,
-      avatar_url: userData?.user_metadata.avatar_url,
+      user_id: user.id,
+      nickname: user.user_metadata.name,
+      avatar_url: user.user_metadata.avatar_url,
     };
 
     if (type === 'CREATE') {
@@ -50,17 +52,17 @@ export default function Post({ defaultData = defaultFormData, type }: Props) {
     }
 
     if (type === 'UPDATE') {
-      updateMutate(postResult);
+      await updatePost(postResult);
       dispatch(updatePostState(true));
     }
 
-    router.push('/board');
+    router.push('/board/1');
   }, []);
 
   return (
     <FormProvider {...methods}>
       <form className="mb-10" onSubmit={handleSubmit(onSubmit)}>
-        <BookDetail coverImg={defaultData.cover} />
+        <BookDetail coverImg={defaultData.cover ?? ''} />
 
         <BookDetailTextArea title="책을 통해 얻고 싶은 인사이트" labelId="before_read" />
         <BookDetailTextArea title="저자가 전달하는 내용" labelId="writer_say" />
