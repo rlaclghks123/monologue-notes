@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 
-import getBestSeller from '@/service/getBestSeller';
+import { getBestSeller } from '@/service/aladinBooks';
 import { BestSeller } from '@/types/book';
 import CardList from './CardList';
 

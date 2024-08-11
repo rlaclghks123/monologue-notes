@@ -6,7 +6,7 @@ import { useFormContext } from 'react-hook-form';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
-import useBookDetail from '@/service/getBookDetail';
+import { useBookDetail } from '@/service/aladinBooks';
 import { SelectedBook } from '@/types/book';
 import { PostFormDataType } from '@/types/post';
 

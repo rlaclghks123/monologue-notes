@@ -33,7 +33,7 @@ export default function BookSearchModal({ isOpen, setIsOpen, setBookId }: Props)
         />
 
         <Pagenation
-          totalCount={searchedBooks?.totalResults}
+          totalCount={searchedBooks?.totalResults ?? 1}
           limit={limit}
           curPage={curPage}
           setCurPage={setCurPage}

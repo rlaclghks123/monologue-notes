@@ -1,10 +1,8 @@
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
-
 export interface IBookDetail {
   totalResults: number;
   item: {
     title: string;
-    cover: string | StaticImport;
+    cover: string;
     publisher: string;
     isbn13: string;
     itemId: number;
@@ -22,7 +20,7 @@ export type SelectedBook = Pick<
 export interface BestSeller {
   itemId: number;
   link: string;
-  cover: string | StaticImport;
+  cover: string;
   title: string;
   author: string;
   isbn13: string;
