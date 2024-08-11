@@ -15,8 +15,8 @@ export default function useAlertTimer(
       } else if (callback) {
         callback();
       }
-    }, 3000);
+    }, 2000);
 
     return () => clearTimeout(timer);
-  }, [alertState, action, callback]);
+  }, [alertState]);
 }
