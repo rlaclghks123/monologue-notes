@@ -29,12 +29,11 @@ export default async function Navigation() {
           </ul>
         </nav>
       </div>
-      <Link
-        href="/auth"
-        className="flex w-2/6 justify-end hover:text-gray-300 xs:text-xs sm:text-base"
-      >
-        {loginText}
-      </Link>
+      <div className="flex w-2/6 justify-end ">
+        <Link href="/auth" className=" hover:text-gray-300 xs:text-xs sm:text-base">
+          {loginText}
+        </Link>
+      </div>
     </header>
   );
 }
