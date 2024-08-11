@@ -1,17 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
 import createClient from '@/utils/supabase/client';
+import creatServer from '@/utils/supabase/server';
 
 const supabase = createClient();
 
-export async function fetchUser() {
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+export async function getUser() {
+  const serverSupabase = await creatServer();
+  const user = await serverSupabase.auth.getUser();
   return user;
-}
-
-export function useUser() {
-  return useQuery({ queryKey: ['useUser'], queryFn: fetchUser });
 }
 
 export async function kakaoLogin() {

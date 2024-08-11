@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 
 const CATEGORY = [
-  { id: 1, name: '게시판', link: '/board' },
+  { id: 1, name: '게시판', link: '/board/1' },
   { id: 2, name: '나의 기록', link: '/mypage' },
 ];
 

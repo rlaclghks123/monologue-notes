@@ -1,6 +1,6 @@
-import { PostFormDataType } from '@/types/post';
+import { CreatePost } from '@/types/post';
 
-export const defaultFormData: PostFormDataType = {
+export const defaultFormData: CreatePost = {
   cover: '',
   title: '',
   publisher: '',
@@ -9,3 +9,5 @@ export const defaultFormData: PostFormDataType = {
   writer_say: '',
   after_read: '',
 };
+
+export const POSTS_LIMIT = 8;

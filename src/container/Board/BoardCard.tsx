@@ -1,13 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { GetPosts } from '@/types/post';
+import { ReadPost } from '@/types/post';
 import NoImg from '../../../public/images/defaultBook.png';
 
-export default function BoardCard({ post }: { post: GetPosts }) {
+interface Props {
+  post: ReadPost;
+}
+export default function BoardCard({ post }: Props) {
   return (
     <li className="w-full cursor-pointer flex-col truncate rounded-lg border border-black p-2 hover:border hover:border-solid hover:border-gray-300 xs:h-24 sm:h-32 xl:h-40">
-      <Link href={`detail/${post.id}`} className="flex h-full items-center">
+      <Link href={`/detail/${post.id}`} className="flex h-full items-center">
         <Image
           src={post.cover || NoImg}
           width={120}

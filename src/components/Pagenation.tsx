@@ -2,10 +2,10 @@ import Button from '@/components/Button';
 import usePagenation from '@/hooks/usePagenation';
 
 interface Props {
-  totalCount?: number;
+  totalCount: number;
   limit: number;
   curPage: number;
-  setCurPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurPage?: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export default function Pagenation({ totalCount, limit, curPage, setCurPage }: Props) {
@@ -13,8 +13,6 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
     usePagenation({ totalCount, limit, curPage, setCurPage });
 
   const isCurPage = (idx: number) => ((curPage - 1) % limit) + 1 === idx + 1;
-
-  if (!totalCount) return null;
 
   return (
     <div className="mt-2 w-full">
