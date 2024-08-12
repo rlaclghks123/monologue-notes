@@ -3,10 +3,10 @@ import { useState } from 'react';
 import Button from '@/components/Button';
 import Modal from '@/components/Modal';
 
+import useSearchBooks from '@/service/aladinBooks';
 import BookSearch from './BookSearch';
 import BookSearchedList from './BookSearchedList';
 import Pagenation from '../../../components/Pagenation';
-import useSearchBooks from '../../../service/getSearchBooks';
 
 interface Props {
   isOpen: boolean;
