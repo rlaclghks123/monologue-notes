@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { useParams } from 'next/navigation';
+import { User } from '@supabase/supabase-js';
+import { useParams, useRouter } from 'next/navigation';
 
 import Button from '@/components/Button';
 import Profile from '@/components/Profile';
@@ -11,15 +12,24 @@ import { changeDate } from '@/utils/changeDate';
 import EmptyHeart from '../../../../public/svgs/emptyHeart.svg';
 import FulledHeart from '../../../../public/svgs/fulledHeart.svg';
 
-export default function ReviewList() {
+interface Props {
+  user: User | null;
+}
+
+export default function ReviewList({ user }: Props) {
   const { id } = useParams();
   const { data: reviews } = useReviews(Number(id));
   const [clickedLikeId, setClickedLikeId] = useState<{ [key: string]: boolean }>({});
   const { mutate: likeMutate } = useLikeReview();
+  const router = useRouter();
 
-  const handleClickLike = (e: React.MouseEvent<HTMLElement>, reviewId: string) => {
-    const parentNode = e.currentTarget?.parentNode as HTMLElement;
-    const prevLike = Number(parentNode.querySelector('p')?.textContent);
+  const handleClickLike = (reviewId: string) => {
+    if (!user) {
+      router.push('/auth');
+      return;
+    }
+    const clickedReview = reviews?.data?.find((data) => data.review_id === reviewId);
+    const prevLike = clickedReview?.review_like;
 
     let payload;
     if (!clickedLikeId[reviewId]) {
@@ -49,7 +59,7 @@ export default function ReviewList() {
                 <Button
                   type="button"
                   variant="secondary"
-                  onClick={(e) => handleClickLike(e, review.review_id)}
+                  onClick={() => handleClickLike(review.review_id)}
                   text={
                     clickedLikeId[review.review_id] ? (
                       <FulledHeart

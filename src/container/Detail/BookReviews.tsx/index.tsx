@@ -10,7 +10,7 @@ export default function BookReviews({ user }: Props) {
   return (
     <div className="mb-10 w-full ">
       <CreateReviews user={user} />
-      <ReviewList />
+      <ReviewList user={user} />
     </div>
   );
 }
