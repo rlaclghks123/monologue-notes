@@ -14,7 +14,7 @@ interface Posts {
 }
 
 const fetchData = async (page: string) => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/board?page=${page}`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/posts?page=${page}`, {
     next: { tags: ['board'] },
   });
 
