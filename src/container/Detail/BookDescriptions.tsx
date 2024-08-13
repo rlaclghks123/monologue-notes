@@ -17,7 +17,7 @@ export default function BookDescriptions({ postDetail }: Props) {
       {DB.map(({ title, id }) => (
         <div key={id}>
           <TitleDescription key={id}>
-            <p>{title}</p>
+            <h2>{title}</h2>
             <div className="h-auto min-h-52 whitespace-pre-wrap bg-white p-2 xs:text-xs sm:text-base">
               {postDetail[id as 'before_read' | 'writer_say' | 'after_read']}
             </div>

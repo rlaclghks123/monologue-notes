@@ -11,9 +11,9 @@ interface Props {
 
 export default function Introduce({ postDetail }: Props) {
   return (
-    <div className="flex h-72 w-full items-center border-b-2 border-solid border-gray-200">
+    <section className="flex h-72 w-full items-center border-b-2 border-solid border-gray-200">
       <TitleDescription className="xs:w-[60%] xs:border-r xs:border-solid xs:border-gray-300 xs:px-4 sm:w-[75%] sm:border-0">
-        <p>책 소개</p>
+        <h2>책 소개</h2>
         <div className="flex xs:flex-col sm:h-full sm:flex-row">
           <Image
             src={postDetail?.cover || NoImg}
@@ -33,7 +33,7 @@ export default function Introduce({ postDetail }: Props) {
 
       <div className="ml-[5%] xs:w-[40%] sm:w-[25%]">
         <TitleDescription>
-          <p>독백자</p>
+          <h2>독백자</h2>
           <div className="flex h-full ">
             <Profile src={postDetail?.avatar_url ?? ''} />
             <div className="truncate xs:text-xs sm:text-base">
@@ -42,6 +42,6 @@ export default function Introduce({ postDetail }: Props) {
           </div>
         </TitleDescription>
       </div>
-    </div>
+    </section>
   );
 }

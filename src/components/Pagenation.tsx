@@ -17,7 +17,7 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
   const isCurPage = (idx: number) => ((curPage - 1) % limit) + 1 === idx + 1;
 
   return (
-    <div className="mt-2 w-full">
+    <nav className="mt-2 w-full">
       <div className="flex items-center justify-center gap-2">
         <Button
           text="<"
@@ -42,6 +42,6 @@ export default function Pagenation({ totalCount, limit, curPage, setCurPage }: P
           className="w-6 rounded-md hover:bg-gray-200 hover:text-white"
         />
       </div>
-    </div>
+    </nav>
   );
 }

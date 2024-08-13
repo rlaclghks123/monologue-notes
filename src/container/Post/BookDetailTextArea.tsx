@@ -19,7 +19,7 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
   });
 
   return (
-    <div className="my-10 flex flex-col">
+    <section className="my-10 flex flex-col">
       <header className="flex justify-between">
         <div>
           <label htmlFor={labelId}>{title}</label>
@@ -36,6 +36,6 @@ export default function BookDetailTextArea({ title, labelId }: Props) {
         maxLength={max}
         className="mt-3 h-52 resize-none rounded-lg p-2 xs:text-xs sm:text-base"
       />
-    </div>
+    </section>
   );
 }

@@ -10,9 +10,9 @@ export default async function BestSellerBanner() {
   const { item: bestSellerList }: { item: BestSeller[] } = await getBestSeller(curPage);
 
   return (
-    <div className="w-ful mt-20">
-      <p className="mb-4 text-lg font-bold">베스트 셀러</p>
+    <section className="w-ful mt-20">
+      <h2 className="mb-4 text-lg font-bold">베스트 셀러</h2>
       <CardList bestSellerList={bestSellerList} curPage={curPage} />
-    </div>
+    </section>
   );
 }
