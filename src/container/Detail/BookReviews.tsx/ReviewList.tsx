@@ -5,6 +5,7 @@ import { User } from '@supabase/supabase-js';
 import { useParams, useRouter } from 'next/navigation';
 
 import Button from '@/components/Button';
+import LoadingUI from '@/components/LoadingUI';
 import Profile from '@/components/Profile';
 import { useLikeReview, useReviews } from '@/service/review';
 import { changeDate } from '@/utils/changeDate';
@@ -18,7 +19,7 @@ interface Props {
 
 export default function ReviewList({ user }: Props) {
   const { id } = useParams();
-  const { data: reviews } = useReviews(Number(id));
+  const { data: reviews, isLoading } = useReviews(Number(id));
   const [clickedLikeId, setClickedLikeId] = useState<{ [key: string]: boolean }>({});
   const { mutate: likeMutate } = useLikeReview();
   const router = useRouter();
@@ -41,6 +42,8 @@ export default function ReviewList({ user }: Props) {
     likeMutate(payload);
     setClickedLikeId((prev) => ({ ...prev, [reviewId]: !prev[reviewId] }));
   };
+
+  if (isLoading) return <LoadingUI />;
 
   return (
     <ul>
