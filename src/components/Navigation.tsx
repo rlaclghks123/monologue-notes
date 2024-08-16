@@ -2,7 +2,8 @@ import { headers } from 'next/headers';
 import Link from 'next/link';
 
 const CATEGORY = [
-  { id: 1, name: '게시판', link: '/board/1' },
+  { id: 1, name: '독백 리스트', link: '/board/1' },
+  { id: 3, name: '추천 도서', link: '/recommend' },
   { id: 2, name: '나의 기록', link: '/mypage' },
 ];
 
@@ -17,11 +18,11 @@ export default async function Navigation() {
           독백노트 📚
         </Link>
         <nav>
-          <ul className=" flex items-center justify-center">
+          <ul className="ml-4 flex items-center justify-center">
             {CATEGORY.map((category) => (
               <li
                 key={category.id}
-                className="mx-3 cursor-pointer hover:text-gray-300 xs:text-xs sm:text-base"
+                className="mx-4 cursor-pointer hover:text-gray-300 xs:text-xs sm:text-base"
               >
                 <Link href={category.link}>{category.name}</Link>
               </li>

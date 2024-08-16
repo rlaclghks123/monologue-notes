@@ -18,7 +18,7 @@ export const metadata: Metadata = {
 const nanuGothic = Nanum_Gothic({
   subsets: ['latin'],
   weight: '400',
-  display: 'optional',
+  display: 'swap',
 });
 
 export default function RootLayout({

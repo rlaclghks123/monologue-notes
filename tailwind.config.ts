@@ -16,10 +16,12 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'home-image': "url('/images/home.webp')",
       },
       colors: {
-        'dark-brown': '#402001',
-        'light-beige': '#FFF8E7',
+        'dark-brown': '#6E2C00',
+        'light-beige': '#F7F9F9',
+        'deep-green': '#2E4053',
         'bg-grey': '#f5f5f7',
         'peach-fuzz': '#febf98',
       },
