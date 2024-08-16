@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={nanuGothic.className}>
         <Providers>
           <Navigation />
-          <div className="fixed z-[999] flex h-full w-full items-center justify-center bg-red-300 xs:hidden">
+          <div className="bg-deep-green fixed z-[999] flex h-full w-full items-center justify-center text-light-beige xs:hidden">
             너무 작은 화면입니다.
           </div>
           <main className="pt-16 xs:px-2 sm:px-16 xl:px-44">{children}</main>
