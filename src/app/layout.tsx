@@ -1,3 +1,4 @@
+import { Nanum_Gothic } from 'next/font/google';
 import Navigation from '@/components/Navigation';
 import type { Metadata } from 'next';
 
@@ -14,6 +15,12 @@ export const metadata: Metadata = {
   },
 };
 
+const nanuGothic = Nanum_Gothic({
+  subsets: ['latin'],
+  weight: '400',
+  display: 'optional',
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -21,9 +28,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>
+      <body className={nanuGothic.className}>
         <Providers>
           <Navigation />
+          <div className="fixed z-[999] flex h-full w-full items-center justify-center bg-red-300 xs:hidden">
+            너무 작은 화면입니다.
+          </div>
           <main className="pt-16 xs:px-2 sm:px-16 xl:px-44">{children}</main>
         </Providers>
       </body>
