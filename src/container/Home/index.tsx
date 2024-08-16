@@ -15,9 +15,9 @@ const DATA = [
 
 export default function Home() {
   return (
-    <div className="bg-home-image fixed inset-0 w-full bg-cover bg-center">
-      <section className="flex h-screen w-screen items-center justify-center font-bold text-light-beige">
-        <div className="-mt-24 flex flex-col justify-center ">
+    <div className="fixed inset-0 w-full bg-home-image bg-cover bg-center">
+      <section className="flex h-screen w-screen items-center justify-center font-bold text-light-beige ">
+        <div className="-mt-48 flex flex-col justify-center ">
           <p className="xs:text-xs sm:text-xl xl:text-2xl">
             독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요
           </p>
