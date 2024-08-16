@@ -40,7 +40,7 @@ export default function Carousel({ size, curPage, children }: Props) {
 
       <div className="flex justify-center">
         {Array.from({ length: size }, (_, idx) => (
-          <Link key={idx} href={`/?page=${idx + 1}`} type="button" className="border-gray-100 p-2">
+          <Link key={idx} href={`?page=${idx + 1}`} type="button" className="border-gray-100 p-2">
             {isCurPage(idx) ? (
               <FullSquare alt="pagenation box" className="h-3 w-3" />
             ) : (
