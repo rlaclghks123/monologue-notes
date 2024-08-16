@@ -18,11 +18,11 @@ export default async function Navigation() {
           독백노트 📚
         </Link>
         <nav>
-          <ul className="ml-4 flex items-center justify-center">
+          <ul className="flex items-center justify-center gap-4 xs:ml-2 sm:ml-10">
             {CATEGORY.map((category) => (
               <li
                 key={category.id}
-                className="mx-4 cursor-pointer hover:text-gray-300 xs:text-xs sm:text-base"
+                className="cursor-pointer hover:text-gray-300 xs:text-xs sm:text-base"
               >
                 <Link href={category.link}>{category.name}</Link>
               </li>
