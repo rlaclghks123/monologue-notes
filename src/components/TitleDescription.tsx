@@ -35,7 +35,7 @@ export default function TitleDescription({ children, className }: Props) {
       }  ${className}`}
     >
       <div className="w-1/4 font-bold xs:text-sm sm:text-lg xl:text-xl">{title}</div>
-      <div className="flex h-full w-3/4 flex-col xs:text-xs sm:text-sm xl:text-lg">
+      <div className="flex h-full w-3/4 flex-col xs:text-xs sm:text-sm xl:text-base">
         <div
           className={`transition-all duration-300 ease-in-out ${isExpanded ? 'overflow-visible' : 'overflow-hidden'}`}
           ref={descriptionRef}
