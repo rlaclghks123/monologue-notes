@@ -8,7 +8,7 @@ interface Props {
 
 export default function BookReviews({ user }: Props) {
   return (
-    <div className="mb-10 w-full ">
+    <div className="my-48 w-full ">
       <CreateReviews user={user} />
       <ReviewList user={user} />
     </div>
