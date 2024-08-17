@@ -13,13 +13,13 @@ interface Props {
 
 export default function Detail({ postDetail, user }: Props) {
   return (
-    <>
+    <div className="flex flex-col gap-2 py-10">
       <Introduce postDetail={postDetail[0]} />
       <BookDescriptions postDetail={postDetail[0]} />
       {user && postDetail[0] && user.id === postDetail[0].user_id && (
         <UpdateOrDeleteButtons postDetail={postDetail[0]} />
       )}
       <BookReviews user={user} />
-    </>
+    </div>
   );
 }
