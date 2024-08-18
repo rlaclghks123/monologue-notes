@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 const DATA = [
   {
     id: 1,
@@ -15,9 +17,12 @@ const DATA = [
 
 export default function Home() {
   return (
-    <div className="fixed inset-0 w-full bg-home-image bg-cover bg-center">
-      <section className="flex h-screen w-screen items-center justify-center font-bold text-light-beige ">
-        <div className="-mt-48 flex flex-col justify-center ">
+    <div className="relative h-screen-without-nav">
+      <figure className="fixed inset-0 z-[-1]">
+        <Image src="/images/home.webp" priority alt="배경 이미지" fill />
+      </figure>
+      <section className="flex h-full items-center justify-center font-bold text-light-beige">
+        <div className="-mt-56 flex flex-col justify-center ">
           <p className="xs:text-xs sm:text-xl xl:text-2xl">
             독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요
           </p>
