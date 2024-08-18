@@ -17,7 +17,7 @@ export type SelectedBook = Pick<
   'title' | 'cover' | 'publisher' | 'subInfo'
 >;
 
-export interface BestSeller {
+export interface RecommendBook {
   itemId: number;
   link: string;
   cover: string;

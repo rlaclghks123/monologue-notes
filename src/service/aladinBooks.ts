@@ -1,14 +1,51 @@
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { SelectedBook, IBookDetail } from '@/types/book';
 
-export async function getBestSeller(curPage: number) {
-  const BASE_URL = 'http://www.aladin.co.kr/ttb/api';
+export async function fetchBookList(
+  curPage: number,
+  queryType: 'Bestseller' | 'ItemNewSpecial' | 'BlogBest',
+) {
+  const BASE_URL = '/api/ttb/api';
   const response = await fetch(
-    `${BASE_URL}/ItemList.aspx?ttbkey=${process.env.NEXT_PUBLIC_ALADIN_OPEN_API_KEY}&QueryType=Bestseller&MaxResults=5&start=${curPage}&SearchTarget=Book&output=JS&Version=20131101`,
+    `${BASE_URL}/ItemList.aspx?ttbkey=${process.env.NEXT_PUBLIC_ALADIN_OPEN_API_KEY}&QueryType=${queryType}&MaxResults=5&start=${curPage}&SearchTarget=Book&output=JS&Version=20131101`,
   );
 
   const json = await response.json();
   return json;
+}
+
+export function useBestSellers(curPage: number) {
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['bestSellers', curPage],
+    queryFn: () => fetchBookList(curPage, 'Bestseller'),
+    select: (items) => items.item,
+    placeholderData: keepPreviousData,
+  });
+
+  return { data, isLoading, isError, refetch };
+}
+
+export function useNewSpeicalList(curPage: number) {
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['ItemNewSpecial', curPage],
+    queryFn: () => fetchBookList(curPage, 'ItemNewSpecial'),
+    select: (items) => items.item,
+
+    placeholderData: keepPreviousData,
+  });
+
+  return { data, isLoading, isError, refetch };
+}
+
+export function useBlogerBestSellerList(curPage: number) {
+  const { data, isLoading, isError, refetch } = useQuery({
+    queryKey: ['BlogBest', curPage],
+    queryFn: () => fetchBookList(curPage, 'BlogBest'),
+    select: (items) => items.item,
+    placeholderData: keepPreviousData,
+  });
+
+  return { data, isLoading, isError, refetch };
 }
 
 async function fetchDetailBook(isbn: string) {
