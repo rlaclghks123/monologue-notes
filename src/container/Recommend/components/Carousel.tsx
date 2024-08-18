@@ -36,7 +36,7 @@ export default function Carousel({
           className="absolute left-0 top-1/2 z-20 flex -translate-y-1/2 items-center justify-center xs:h-3 xs:w-3 sm:h-5 sm:w-5"
         />
 
-        <div className="flex w-[95%] items-center justify-evenly xs:gap-2 sm:gap-6 xl:gap-10">
+        <div className="flex w-[90%] items-center justify-evenly xs:gap-2 sm:gap-2 xl:gap-10">
           {children}
         </div>
 
