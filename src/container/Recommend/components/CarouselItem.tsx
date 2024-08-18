@@ -17,7 +17,7 @@ export default function CarouselItem({ data }: Props) {
           fill
           priority
           alt="aladin list card images"
-          className="rounded-xl"
+          className="rounded-xl bg-gray-300"
         />
       </figure>
       <p className=" w-10 truncate text-center xs:text-[8px] sm:w-20 sm:text-xs xl:w-28">
