@@ -1,9 +1,9 @@
 import useCarousel from '@/hooks/useCarousel';
 import { useNewSpeicalList } from '@/service/aladinBooks';
 import { RecommendBook } from '@/types/book';
-import Carousel from './Carousel';
-import CarouselItem from './CarouselItem';
-import RecommendCardItemSkeleton from './RecommendCardItemSkeleton';
+import Carousel from './components/Carousel';
+import CarouselItem from './components/CarouselItem';
+import RecommendCardItemSkeleton from './components/RecommendCardItemSkeleton';
 
 export default function NewSpecialList() {
   const carousel = useCarousel(5);

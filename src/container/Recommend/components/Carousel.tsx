@@ -2,11 +2,11 @@ import { ReactNode } from 'react';
 
 import Button from '@/components/Button';
 
-import Left from '../../../public/svgs/angleLeft.svg';
-import Right from '../../../public/svgs/angleRight.svg';
+import Left from '../../../../public/svgs/angleLeft.svg';
+import Right from '../../../../public/svgs/angleRight.svg';
 
-import EmptySquare from '../../../public/svgs/emptySquare.svg';
-import FullSquare from '../../../public/svgs/fullSquare.svg';
+import EmptySquare from '../../../../public/svgs/emptySquare.svg';
+import FullSquare from '../../../../public/svgs/fullSquare.svg';
 
 interface Props {
   size: number;
