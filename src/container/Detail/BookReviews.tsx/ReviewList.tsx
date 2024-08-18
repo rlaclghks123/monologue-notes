@@ -29,7 +29,7 @@ export default function ReviewList({ user }: Props) {
       router.push('/auth');
       return;
     }
-    const clickedReview = reviews?.data?.find((data) => data.review_id === reviewId);
+    const clickedReview = reviews?.find((data) => data.review_id === reviewId);
     const prevLike = clickedReview?.review_like;
 
     let payload;
@@ -45,9 +45,11 @@ export default function ReviewList({ user }: Props) {
 
   if (isLoading) return <LoadingUI />;
 
+  if (reviews?.length === 0) return <div className="text-center">등록된 댓글이 없습니다.</div>;
+
   return (
     <ul>
-      {reviews?.data?.map((review) => (
+      {reviews?.map((review) => (
         <li key={review.review_id} className="my-10 flex" data-post-id={review.post_id}>
           <Profile src={review.avatar_url ?? ''} />
 

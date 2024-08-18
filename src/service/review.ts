@@ -18,6 +18,7 @@ export function useReviews(postId: number) {
   return useQuery({
     queryKey: ['post_reviews'],
     queryFn: () => fetchReviews(postId),
+    select: (reviews) => reviews.data,
   });
 }
 
