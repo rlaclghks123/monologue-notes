@@ -21,15 +21,17 @@ export default function Home() {
       <figure className="fixed inset-0 z-[-1]">
         <Image src="/images/home.webp" priority alt="배경 이미지" fill />
       </figure>
-      <section className="flex h-full items-center justify-center font-bold text-light-beige">
-        <div className="-mt-56 flex flex-col justify-center ">
-          <p className="xs:text-xs sm:text-xl xl:text-2xl">
+      <section className="relative flex h-full items-center justify-end font-bold">
+        <div className="flex h-[80%] w-[60%] animate-pulse flex-col justify-center rounded-lg text-deep-green">
+          <p className="text-center xs:text-xs sm:text-base xl:text-xl">
             독백노트를 통해 3단계로 기록하여 지식을 오래도록 기억해보세요
           </p>
 
-          <div className="mt-10 flex flex-col items-center justify-center gap-3 xs:text-xs sm:text-base xl:text-xl">
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 xs:text-xs sm:text-sm xl:text-base">
             {DATA.map(({ id, content }) => (
-              <p key={id}>{content}</p>
+              <p className="p-2 text-center" key={id}>
+                {content}
+              </p>
             ))}
           </div>
         </div>
