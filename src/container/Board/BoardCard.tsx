@@ -9,7 +9,7 @@ interface Props {
 }
 export default function BoardCard({ post }: Props) {
   return (
-    <li className="w-full transform cursor-pointer flex-col truncate rounded-xl border border-black bg-white p-2 shadow-md transition duration-300 hover:scale-105 xs:h-24 sm:h-32 xl:h-40">
+    <li className="w-full transform cursor-pointer flex-col truncate rounded-xl border border-black bg-white p-2 shadow-md transition duration-300 hover:scale-105 xs:h-24 sm:h-32 xl:h-36">
       <Link href={`/detail/${post.id}`} className="flex h-full items-center">
         <Image
           src={post.cover || NoImg}

@@ -8,7 +8,7 @@ import { Tables } from '@/types/supabase';
 import { POSTS_LIMIT } from '@/utils/constants';
 import creatServer from '@/utils/supabase/server';
 
-export async function getPosts(curPage: number) {
+export async function getPosts(curPage: number, search: string) {
   const supabase = await creatServer();
 
   const from = (curPage - 1) * (POSTS_LIMIT + 1);
@@ -17,6 +17,7 @@ export async function getPosts(curPage: number) {
   const { data, count, error } = await supabase
     .from('post')
     .select('*', { count: 'exact' })
+    .ilike('title', `%${search}%`)
     .range(from, to)
     .returns<Tables<'post'>[]>();
 

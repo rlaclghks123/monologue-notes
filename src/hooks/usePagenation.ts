@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 interface Props {
   totalCount: number;
@@ -21,22 +21,32 @@ function usePagenation({ totalCount, limit, curPage, setCurPage }: Props) {
   const [pagenationArr, setPagenationArr] = useState(sliceArrayByLimit(totalCount, limit));
   const [curPageGroup, setCurPageGroup] = useState(0);
   const [numberOfPages, setNumberOfPages] = useState(1);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const [currentUrl, setCurrentUrl] = useState(pathname);
+
+  useEffect(() => {
+    const url = `${pathname}?${searchParams}`;
+    if (!searchParams.get('page')) {
+      setCurrentUrl(url);
+    }
+  }, [pathname, searchParams]);
 
   const handlePrev = () => {
     if (setCurPage) setCurPage((prev) => prev - 1);
-    if (!setCurPage) router.push(`${curPage - 1}`);
+    if (!setCurPage) router.push(`${currentUrl}&page=${curPage - 1}`);
     setCurPageGroup(Math.floor((curPage - 2) / limit));
   };
 
   const handleClickPage = (index: number) => {
-    if (!setCurPage) router.push(`${index}`);
+    if (!setCurPage) router.push(`${currentUrl}&page=${index}`);
     if (setCurPage) setCurPage(index);
   };
 
   const handleNext = () => {
     if (!totalCount || curPage * (limit + 1) >= totalCount) return;
     if (setCurPage) setCurPage((prev) => prev + 1);
-    if (!setCurPage) router.push(`${curPage + 1}`);
+    if (!setCurPage) router.push(`${currentUrl}&page=${curPage + 1}`);
     setCurPageGroup(Math.floor(curPage / limit));
   };
 
