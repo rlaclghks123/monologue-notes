@@ -2,7 +2,12 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['image.aladin.co.kr', 'k.kakaocdn.net'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'image.aladin.co.kr',
+      },
+    ],
   },
   webpack(config) {
     config.module.rules.push({
