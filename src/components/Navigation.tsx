@@ -14,7 +14,7 @@ export default async function Navigation() {
   return (
     <header className="fixed z-[90] flex h-16 items-center justify-between bg-white xs:w-full xs:px-2 sm:px-16 xl:px-44">
       <div className="flex h-16 w-2/6 items-center justify-between whitespace-nowrap ">
-        <Link href="/" className=" font-bold xs:text-base sm:text-2xl">
+        <Link href="/" className=" font-bold xs:text-base sm:text-2xl" prefetch>
           독백노트 📚
         </Link>
         <nav>
