@@ -6,10 +6,12 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'image.aladin.co.kr',
+        pathname: '**',
       },
       {
-        protocol: 'https',
+        protocol: 'http',
         hostname: 'k.kakaocdn.net',
+        pathname: '**',
       },
     ],
   },
